@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grand Line Tools</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="panel">
+      <header class="head">
+        <img class="mark" src="icons/icon-48.png" alt="" width="36" height="36">
+        <div>
+          <p class="eyebrow">WANTED · COMPANION</p>
+          <h1>Grand Line Tools</h1>
+        </div>
+      </header>
+
+      <section id="view-login" class="view" hidden>
+        <p class="lede">Sign in with your ship account. Actions save to your user id.</p>
+        <label>Server URL
+          <input id="server-url" type="url" autocomplete="url" placeholder="https://onepiece.prayushadhikari.com.np" value="https://onepiece.prayushadhikari.com.np">
+        </label>
+        <label>Username
+          <input id="username" autocomplete="username" maxlength="24" placeholder="your_username">
+        </label>
+        <label>Password
+          <input id="password" type="password" autocomplete="current-password" placeholder="Your password">
+        </label>
+        <button id="login-btn" class="primary" type="button">Set sail</button>
+        <p id="login-error" class="error" role="alert"></p>
+      </section>
+
+      <section id="view-home" class="view" hidden>
+        <p class="signed">Signed in as <strong id="display-name">—</strong></p>
+        <nav class="tabs" role="tablist" aria-label="Companion tools">
+          <button class="tab active" type="button" data-tab="charts" role="tab" aria-selected="true">Charts</button>
+          <button class="tab" type="button" data-tab="berries" role="tab" aria-selected="false">Berries</button>
+          <button class="tab" type="button" data-tab="logbook" role="tab" aria-selected="false">Logbook</button>
+          <button class="tab" type="button" data-tab="bell" role="tab" aria-selected="false">Bell</button>
+          <button class="tab" type="button" data-tab="account" role="tab" aria-selected="false">Account</button>
+        </nav>
+
+        <div id="panel-charts" class="tab-panel" data-panel="charts">
+          <label>Chart title<input id="chart-title" maxlength="160" placeholder="Page title"></label>
+          <label>URL<input id="chart-url" type="url" maxlength="800" placeholder="https://"></label>
+          <label>Note<textarea id="chart-note" rows="2" maxlength="500" placeholder="Optional cook's note"></textarea></label>
+          <button id="save-chart-btn" class="primary" type="button">Seal sea chart</button>
+        </div>
+
+        <div id="panel-berries" class="tab-panel" data-panel="berries" hidden>
+          <label>Type
+            <select id="berry-flow">
+              <option value="expense">Expense</option>
+              <option value="income">Income</option>
+            </select>
+          </label>
+          <label>Amount<input id="berry-amount" type="number" min="0" step="0.01" placeholder="12.50"></label>
+          <label>Title<input id="berry-title" maxlength="160" placeholder="Rations / bounty"></label>
+          <label>Category
+            <select id="berry-category">
+              <option value="food">Food</option>
+              <option value="gear">Gear</option>
+              <option value="travel">Travel</option>
+              <option value="lodging">Lodging</option>
+              <option value="fun">Fun</option>
+              <option value="medical">Medical</option>
+              <option value="other">Other</option>
+              <option value="bounty">Bounty</option>
+              <option value="pay">Pay</option>
+              <option value="loot">Loot</option>
+            </select>
+          </label>
+          <label>Date<input id="berry-date" type="date"></label>
+          <button id="save-berry-btn" class="primary" type="button">Log berries</button>
+        </div>
+
+        <div id="panel-logbook" class="tab-panel" data-panel="logbook" hidden>
+          <label>Title<input id="note-title" maxlength="200" placeholder="Voyage log title"></label>
+          <label>Entry<textarea id="note-body" rows="4" maxlength="20000" placeholder="What happened on this island…"></textarea></label>
+          <button id="save-note-btn" class="primary" type="button">Seal log entry</button>
+        </div>
+
+        <div id="panel-bell" class="tab-panel" data-panel="bell" hidden>
+          <label>Title<input id="signal-title" maxlength="160" placeholder="What should the nest shout?"></label>
+          <label>When<input id="signal-due" type="datetime-local"></label>
+          <label>Type
+            <select id="signal-kind">
+              <option value="reminder">Reminder</option>
+              <option value="alarm">Alarm</option>
+            </select>
+          </label>
+          <button id="save-signal-btn" class="primary" type="button">Set the bell</button>
+        </div>
+
+        <div id="panel-account" class="tab-panel" data-panel="account" hidden>
+          <p class="lede">Open the full ship or leave the dock.</p>
+          <button id="open-app-btn" class="primary" type="button">Open ship</button>
+          <button id="logout-btn" class="ghost danger" type="button">Sign out</button>
+        </div>
+
+        <p id="home-status" class="status" role="status"></p>
+      </section>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

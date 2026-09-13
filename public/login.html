@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#061527">
+    <meta name="description" content="Grand Line Tools — login or join the crew">
+    <link rel="icon" href="/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=jolly">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png?v=jolly">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png?v=jolly">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pirata+One&family=Special+Elite&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Nunito", "ui-sans-serif", "system-ui", "sans-serif"],
+              pirate: ["Pirata One", "cursive"],
+              log: ["Special Elite", "ui-monospace", "monospace"],
+            },
+            colors: {
+              sea: { 50:"#eef7ff",100:"#d9ecff",200:"#bcdcff",300:"#8ec6ff",400:"#4aa3ff",500:"#1e7ef0",600:"#0f5fd0",700:"#0a4aa8",800:"#0c3d87",900:"#0a2342",950:"#061527" },
+              straw: { 300:"#ffe07a",400:"#f5c518",500:"#e8a317",600:"#c47f0e" },
+              wanted: { 500:"#c41e3a",600:"#9e1530" },
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/landing.css">
+    <title>Set sail — Grand Line Tools</title>
+  </head>
+  <body class="dock-page min-h-dvh overflow-x-hidden font-sans text-sea-950 antialiased">
+    <div class="dock-sky" aria-hidden="true">
+      <div class="dock-sky-wash"></div>
+      <div class="dock-horizon"></div>
+      <div class="dock-waves">
+        <span class="dock-wave dock-wave-a"></span>
+        <span class="dock-wave dock-wave-b"></span>
+        <span class="dock-wave dock-wave-c"></span>
+      </div>
+      <div class="dock-map-grid"></div>
+      <div class="dock-grain"></div>
+      <div class="dock-sun"></div>
+      <svg class="dock-compass" viewBox="0 0 120 120" focusable="false">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+        <circle cx="60" cy="60" r="38" fill="none" stroke="currentColor" stroke-width="1" opacity=".25"/>
+        <path d="M60 12 L64 52 L60 48 L56 52 Z" fill="currentColor" opacity=".55"/>
+        <path d="M60 108 L56 68 L60 72 L64 68 Z" fill="currentColor" opacity=".25"/>
+        <path d="M12 60 L52 56 L48 60 L52 64 Z" fill="currentColor" opacity=".25"/>
+        <path d="M108 60 L68 64 L72 60 L68 56 Z" fill="currentColor" opacity=".25"/>
+        <circle cx="60" cy="60" r="4" fill="currentColor" opacity=".5"/>
+      </svg>
+      <div class="dock-sparks"></div>
+    </div>
+
+    <a class="dock-home-link" href="/">← Grand Line Tools</a>
+
+    <main class="relative z-20 grid min-h-dvh place-items-center px-5 py-10">
+      <div class="dock-scene" aria-hidden="true">
+        <img class="dock-ship ship-bob" src="/assets/ship-hero.png?v=2" alt="" width="420" height="280">
+        <img class="dock-jolly" src="/assets/jolly-roger.png?v=2" alt="" width="110" height="110">
+      </div>
+
+      <section class="wanted-poster dock-poster animate-board-in w-full max-w-md p-8 sm:p-10">
+        <div class="mb-5 flex flex-col items-center text-center">
+          <img class="lock-brand-mark mb-3 h-16 w-16 object-contain" src="/assets/jolly-roger.png?v=2" alt="">
+          <p class="login-brand-strip" aria-hidden="true">WANTED · CREW</p>
+          <p class="font-log text-xs tracking-wide text-sea-800/70">Straw Hat Archives</p>
+          <h1 class="font-pirate mt-1 text-4xl text-sea-900">Grand Line Tools</h1>
+          <p class="mt-3 max-w-sm text-[15px] font-bold leading-relaxed text-sea-800/75">Log in to your ship, or register a new crew berth — free for every pirate.</p>
+        </div>
+
+        <div class="auth-tabs" role="tablist" aria-label="Auth mode">
+          <button id="tab-login" class="auth-tab active" type="button" role="tab" aria-selected="true">Login</button>
+          <button id="tab-register" class="auth-tab" type="button" role="tab" aria-selected="false">Register</button>
+        </div>
+
+        <form id="login-form" class="auth-form" autocomplete="on">
+          <label class="mb-2 block text-sm font-extrabold text-sea-900" for="login-username">Username</label>
+          <input id="login-username" name="username" class="field mb-3 min-h-12 w-full rounded-xl px-4" required maxlength="24" autocomplete="username" placeholder="your_username">
+          <label class="mb-2 block text-sm font-extrabold text-sea-900" for="login-password">Password</label>
+          <input id="login-password" name="password" type="password" class="field mb-4 min-h-12 w-full rounded-xl px-4" required autocomplete="current-password" placeholder="Your password">
+          <button class="btn-primary unlock-button min-h-12 w-full rounded-xl px-6 font-extrabold" type="submit">Set sail</button>
+          <p id="login-error" class="mt-3 min-h-5 text-sm font-bold text-wanted-500" role="alert"></p>
+        </form>
+
+        <form id="register-form" class="auth-form" hidden autocomplete="on">
+          <label class="mb-2 block text-sm font-extrabold text-sea-900" for="register-username">Username</label>
+          <input id="register-username" name="username" class="field mb-3 min-h-12 w-full rounded-xl px-4" required maxlength="24" autocomplete="username" placeholder="new_pirate">
+          <label class="mb-2 block text-sm font-extrabold text-sea-900" for="register-display">Display name</label>
+          <input id="register-display" name="displayName" class="field mb-3 min-h-12 w-full rounded-xl px-4" maxlength="40" autocomplete="nickname" placeholder="Monkey D. Luffy">
+          <label class="mb-2 block text-sm font-extrabold text-sea-900" for="register-password">Password</label>
+          <input id="register-password" name="password" type="password" class="field mb-3 min-h-12 w-full rounded-xl px-4" required minlength="4" autocomplete="new-password" placeholder="At least 4 characters">
+          <label class="mb-2 block text-sm font-extrabold text-sea-900" for="register-password2">Confirm password</label>
+          <input id="register-password2" name="password2" type="password" class="field mb-4 min-h-12 w-full rounded-xl px-4" required minlength="4" autocomplete="new-password">
+          <button class="btn-primary unlock-button min-h-12 w-full rounded-xl px-6 font-extrabold" type="submit">Join the crew</button>
+          <p id="register-error" class="mt-3 min-h-5 text-sm font-bold text-wanted-500" role="alert"></p>
+        </form>
+      </section>
+    </main>
+
+    <script src="/login.js" type="module"></script>
+  </body>
+</html>

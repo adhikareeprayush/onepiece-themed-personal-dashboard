@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#061527">
+    <meta name="description" content="Grand Line Tools — a free One Piece–inspired personal toolkit for notes, treasure vaults, quests, and voyage charts.">
+    <link rel="icon" href="/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=jolly">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png?v=jolly">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png?v=jolly">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pirata+One&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/landing.css">
+    <title>Grand Line Tools — Chart your voyage</title>
+  </head>
+  <body class="landing">
+    <div class="dock-sky" aria-hidden="true">
+      <div class="dock-sky-wash"></div>
+      <div class="dock-horizon"></div>
+      <div class="dock-waves">
+        <span class="dock-wave dock-wave-a"></span>
+        <span class="dock-wave dock-wave-b"></span>
+        <span class="dock-wave dock-wave-c"></span>
+      </div>
+      <div class="dock-map-grid"></div>
+      <div class="dock-grain"></div>
+      <div class="dock-sun"></div>
+      <svg class="dock-compass" viewBox="0 0 120 120" focusable="false">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+        <circle cx="60" cy="60" r="38" fill="none" stroke="currentColor" stroke-width="1" opacity=".25"/>
+        <path d="M60 12 L64 52 L60 48 L56 52 Z" fill="currentColor" opacity=".55"/>
+        <path d="M60 108 L56 68 L60 72 L64 68 Z" fill="currentColor" opacity=".25"/>
+        <path d="M12 60 L52 56 L48 60 L52 64 Z" fill="currentColor" opacity=".25"/>
+        <path d="M108 60 L68 64 L72 60 L68 56 Z" fill="currentColor" opacity=".25"/>
+        <circle cx="60" cy="60" r="4" fill="currentColor" opacity=".5"/>
+      </svg>
+      <div class="dock-sparks"></div>
+    </div>
+
+    <header class="land-nav">
+      <a class="land-brand" href="#top" aria-label="Grand Line Tools home">
+        <img src="/assets/jolly-roger.png?v=2" alt="" width="40" height="40">
+        <span class="land-brand-text">
+          <span class="land-brand-name">Grand Line Tools</span>
+          <span class="land-brand-tag">Straw Hat Archives</span>
+        </span>
+      </a>
+      <nav class="land-nav-links" aria-label="Page">
+        <a href="#gear">Gear</a>
+        <a href="#crew">Crew</a>
+        <a href="#free">Free</a>
+      </nav>
+      <div class="land-nav-actions">
+        <a class="land-link-quiet" href="/login">Log in</a>
+        <a class="land-btn land-btn-straw" href="/login?mode=register">Join the crew</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="land-hero" aria-labelledby="land-hero-title">
+        <div class="land-hero-copy land-reveal">
+          <p class="land-wanted-strip">WANTED · FREE CREW TOOLKIT</p>
+          <p class="land-kicker font-log">Set sail from East Blue</p>
+          <h1 id="land-hero-title" class="land-hero-brand">Grand Line Tools</h1>
+          <p class="land-hero-lead">
+            Chart your notes, guard your treasure, and chase every quest —
+            a free personal toolkit built for One Piece fans who live by the sea.
+          </p>
+          <div class="land-hero-cta">
+            <a class="land-btn land-btn-straw land-btn-lg" href="/login?mode=register">Join the crew</a>
+            <a class="land-btn land-btn-ghost land-btn-lg" href="/login">I have a berth</a>
+          </div>
+        </div>
+        <div class="land-hero-visual" aria-hidden="true">
+          <img class="land-hero-ship ship-bob" src="/assets/ship-hero.png?v=2" alt="" width="720" height="480">
+          <div class="land-hero-wake"></div>
+        </div>
+      </section>
+
+      <section id="gear" class="land-section land-gear" aria-labelledby="gear-title">
+        <div class="land-section-head land-reveal">
+          <p class="land-kicker font-log">Ship’s inventory</p>
+          <h2 id="gear-title" class="land-section-title">Everything a captain needs aboard</h2>
+          <p class="land-section-lead">One logbook. Eight tools. Zero fluff — just the kit you’d stash under the Sunny’s deck.</p>
+        </div>
+
+        <ol class="land-route">
+          <li class="land-island land-reveal" style="--i:0">
+            <span class="land-island-mark" aria-hidden="true">01</span>
+            <h3>Logbook notes</h3>
+            <p>Markdown voyage logs with tags, fullscreen reading, and a command palette that finds anything fast.</p>
+          </li>
+          <li class="land-island land-reveal" style="--i:1">
+            <span class="land-island-mark" aria-hidden="true">02</span>
+            <h3>Treasure vault</h3>
+            <p>Lock passwords and secrets behind your ship key — copy in a click when the Navy’s on your tail.</p>
+          </li>
+          <li class="land-island land-reveal" style="--i:2">
+            <span class="land-island-mark" aria-hidden="true">03</span>
+            <h3>Quest board</h3>
+            <p>Break big dreams into subquests, claim bounty points, and keep your next island in sight.</p>
+          </li>
+          <li class="land-island land-reveal" style="--i:3">
+            <span class="land-island-mark" aria-hidden="true">04</span>
+            <h3>Sea charts</h3>
+            <p>Pin maps, plans, and reference sheets so your navigator never loses the route.</p>
+          </li>
+          <li class="land-island land-reveal" style="--i:4">
+            <span class="land-island-mark" aria-hidden="true">05</span>
+            <h3>Snippets &amp; berries</h3>
+            <p>Stash reusable code scraps and track expenses in berries — because even pirates budget.</p>
+          </li>
+          <li class="land-island land-reveal" style="--i:5">
+            <span class="land-island-mark" aria-hidden="true">06</span>
+            <h3>Gear Second focus</h3>
+            <p>Timed focus sessions with a WANTED seal CTA — stretch like rubber, finish like a Yonko.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="crew" class="land-section land-crew" aria-labelledby="crew-title">
+        <div class="land-section-head land-reveal">
+          <p class="land-kicker font-log">Muster roll</p>
+          <h2 id="crew-title" class="land-section-title">Built with Straw Hat spirit</h2>
+          <p class="land-section-lead">Not another bland productivity app — a crew-themed home base that feels like the Grand Line.</p>
+        </div>
+        <div class="land-crew-rail" aria-hidden="true">
+          <figure class="land-crew-shot land-reveal" style="--i:0">
+            <img src="/assets/crew-captain.png?v=2" alt="" width="280" height="360">
+            <figcaption class="font-log">Captain</figcaption>
+          </figure>
+          <figure class="land-crew-shot land-reveal" style="--i:1">
+            <img src="/assets/crew-swordsman.png?v=2" alt="" width="280" height="360">
+            <figcaption class="font-log">Swordsman</figcaption>
+          </figure>
+          <figure class="land-crew-shot land-reveal" style="--i:2">
+            <img src="/assets/crew-navigator.png?v=2" alt="" width="280" height="360">
+            <figcaption class="font-log">Navigator</figcaption>
+          </figure>
+          <figure class="land-crew-shot land-reveal" style="--i:3">
+            <img src="/assets/crew-cook.png?v=2" alt="" width="280" height="360">
+            <figcaption class="font-log">Cook</figcaption>
+          </figure>
+        </div>
+        <ul class="land-crew-perks land-reveal">
+          <li>Captain profile &amp; shareable crew ID</li>
+          <li>Friend list for fellow pirates</li>
+          <li>Wanted-poster UI from dock to deck</li>
+          <li>Works on desktop and phone</li>
+        </ul>
+      </section>
+
+      <section id="free" class="land-free land-reveal" aria-labelledby="free-title">
+        <p class="land-wanted-strip">WANTED · NO BOUNTY DUE</p>
+        <h2 id="free-title" class="land-free-title">Free for every crew — for now and beyond</h2>
+        <p class="land-free-lead">No paywall, no berry tax. Register a berth, set sail, and keep your voyage logs private on your ship.</p>
+        <div class="land-hero-cta">
+          <a class="land-btn land-btn-straw land-btn-lg" href="/login?mode=register">Claim your berth</a>
+          <a class="land-btn land-btn-ghost land-btn-lg" href="/login">Log in to the dock</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="land-footer">
+      <div class="land-footer-brand">
+        <img src="/assets/jolly-roger.png?v=2" alt="" width="36" height="36">
+        <div>
+          <p class="land-footer-name">Grand Line Tools</p>
+          <p class="land-footer-note font-log">Fan-made toolkit · Not affiliated with Toei or Eiichiro Oda</p>
+        </div>
+      </div>
+      <a class="land-link-quiet" href="/login">Set sail →</a>
+    </footer>
+
+    <script src="/landing.js" type="module"></script>
+  </body>
+</html>

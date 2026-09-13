@@ -1,0 +1,749 @@
+/* Grand Line Tools — landing + shared dock sky */
+
+:root {
+  --sea-deep: #061527;
+  --sea-navy: #0a2342;
+  --sea-mid: #0c3d87;
+  --sea-bright: #1e7ef0;
+  --sea-foam: #8ec6ff;
+  --straw: #f5c518;
+  --straw-deep: #c47f0e;
+  --wanted: #c41e3a;
+  --ink: #1a1008;
+  --parchment: #fff6dc;
+  --parchment-mid: #f3e2b4;
+  --paper-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  --font-display: "Pirata One", cursive;
+  --font-log: "Special Elite", ui-monospace, monospace;
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body.landing {
+  margin: 0;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  color: #fff8e7;
+  background: var(--sea-deep);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-log { font-family: var(--font-log); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+/* —— Shared dock sky (landing + login) —— */
+.dock-sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 70% 0%, rgba(255, 214, 90, 0.28), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 10% 20%, rgba(74, 163, 255, 0.22), transparent 50%),
+    radial-gradient(ellipse 70% 45% at 50% 100%, rgba(196, 30, 58, 0.18), transparent 55%),
+    linear-gradient(185deg, #04101c 0%, #0a2342 38%, #0c3d87 72%, #1456a8 100%);
+}
+
+.dock-sky-wash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 0%, transparent 42%, rgba(6, 21, 39, 0.35) 70%, rgba(6, 21, 39, 0.75) 100%);
+}
+
+.dock-horizon {
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  bottom: 28%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 248, 231, 0.35), transparent);
+  box-shadow: 0 0 40px 8px rgba(142, 198, 255, 0.15);
+}
+
+.dock-waves { position: absolute; inset: auto 0 0; height: 42%; }
+
+.dock-wave {
+  position: absolute;
+  left: -15%;
+  width: 130%;
+  height: 70%;
+  border-radius: 40% 60% 45% 55%;
+  opacity: 0.2;
+  animation: dockWave 18s ease-in-out infinite;
+}
+
+.dock-wave-a {
+  bottom: -18%;
+  background: #1e7ef0;
+  animation-duration: 16s;
+}
+
+.dock-wave-b {
+  bottom: -28%;
+  background: #4aa3ff;
+  opacity: 0.14;
+  animation-duration: 22s;
+  animation-direction: reverse;
+}
+
+.dock-wave-c {
+  bottom: -38%;
+  background: #8ec6ff;
+  opacity: 0.1;
+  animation-duration: 28s;
+}
+
+@keyframes dockWave {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(2.5%) translateY(-3%); }
+}
+
+.dock-map-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(255, 248, 231, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 248, 231, 0.35) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+}
+
+.dock-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.28;
+  mix-blend-mode: soft-light;
+  background-image: var(--paper-noise);
+}
+
+.dock-sun {
+  position: absolute;
+  top: 8%;
+  right: 14%;
+  width: min(18vw, 140px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, #fff6c8, #f5c518 45%, #c47f0e 78%, transparent 79%);
+  box-shadow:
+    0 0 60px 20px rgba(245, 197, 24, 0.35),
+    0 0 120px 40px rgba(245, 197, 24, 0.12);
+  animation: sunPulse 8s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+  0%, 100% { transform: scale(1); opacity: 0.95; }
+  50% { transform: scale(1.04); opacity: 1; }
+}
+
+.dock-compass {
+  position: absolute;
+  left: 4%;
+  bottom: 18%;
+  width: min(22vw, 160px);
+  color: #fff8e7;
+  opacity: 0.35;
+  animation: compassSpin 60s linear infinite;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
+}
+
+@keyframes compassSpin {
+  to { transform: rotate(360deg); }
+}
+
+.dock-sparks {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 18% 28%, rgba(255, 224, 122, 0.55) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 72% 18%, rgba(255, 248, 231, 0.4) 0 1px, transparent 2px),
+    radial-gradient(circle at 40% 55%, rgba(142, 198, 255, 0.45) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 88% 48%, rgba(245, 197, 24, 0.4) 0 1px, transparent 2px),
+    radial-gradient(circle at 55% 22%, rgba(255, 248, 231, 0.35) 0 1px, transparent 2px);
+  animation: sparkDrift 14s ease-in-out infinite;
+}
+
+@keyframes sparkDrift {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(-10px); opacity: 1; }
+}
+
+@keyframes shipBob {
+  0%, 100% { transform: translateY(0) rotate(-0.6deg); }
+  50% { transform: translateY(-10px) rotate(0.6deg); }
+}
+
+.ship-bob { animation: shipBob 5.5s ease-in-out infinite; }
+
+/* —— Buttons / links —— */
+.land-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border: 2.5px solid #1a1008;
+  border-radius: 0.25rem 0.85rem 0.25rem 0.85rem;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.land-btn-lg {
+  min-height: 3.15rem;
+  padding: 0 1.55rem;
+  font-size: 1.05rem;
+}
+
+.land-btn-straw {
+  background: linear-gradient(180deg, #ffd84d 0%, var(--straw) 42%, var(--straw-deep) 100%);
+  color: var(--sea-deep);
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.35);
+}
+
+.land-btn-straw:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 7px 0 rgba(0, 0, 0, 0.35);
+}
+
+.land-btn-straw:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.land-btn-ghost {
+  background: rgba(255, 248, 231, 0.08);
+  color: #fff8e7;
+  border-color: rgba(255, 248, 231, 0.45);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.land-btn-ghost:hover {
+  background: rgba(255, 248, 231, 0.16);
+  transform: translateY(-2px);
+}
+
+.land-link-quiet {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: rgba(255, 248, 231, 0.78);
+  transition: color 160ms ease;
+}
+
+.land-link-quiet:hover { color: var(--straw); }
+
+.land-wanted-strip {
+  display: inline-flex;
+  margin: 0 0 1rem;
+  padding: 0.2rem 0.75rem;
+  background: var(--wanted);
+  color: #fff8e7;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  border: 2px solid #1a1008;
+  transform: rotate(-2deg);
+  box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.land-kicker {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 224, 122, 0.9);
+}
+
+/* —— Nav —— */
+.land-nav {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 2.5rem);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.land-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.land-brand img {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+.land-brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.land-brand-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.1;
+  color: #fff8e7;
+}
+
+.land-brand-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 224, 122, 0.75);
+}
+
+.land-nav-links {
+  display: none;
+  gap: 1.35rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: rgba(255, 248, 231, 0.72);
+}
+
+.land-nav-links a:hover { color: var(--straw); }
+
+.land-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+@media (min-width: 860px) {
+  .land-nav-links { display: flex; }
+}
+
+/* —— Hero: one composition —— */
+.land-hero {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  align-items: end;
+  min-height: calc(100dvh - 4.5rem);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem clamp(1rem, 4vw, 2.5rem) 2.5rem;
+  gap: 1rem;
+}
+
+.land-hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 34rem;
+  padding-bottom: 1.5rem;
+}
+
+.land-hero-brand {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 10vw, 5.6rem);
+  line-height: 0.95;
+  color: #fff8e7;
+  text-shadow:
+    0 2px 0 #1a1008,
+    0 8px 24px rgba(0, 0, 0, 0.45);
+  letter-spacing: 0.01em;
+}
+
+.land-hero-lead {
+  margin: 0 0 1.5rem;
+  max-width: 28rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.55;
+  color: rgba(255, 248, 231, 0.82);
+}
+
+.land-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.land-hero-visual {
+  position: absolute;
+  right: -4%;
+  bottom: 0;
+  width: min(72vw, 640px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.land-hero-ship {
+  width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 28px 40px rgba(0, 0, 0, 0.55));
+  mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+.land-hero-wake {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 4%;
+  height: 18%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35), transparent 70%);
+  filter: blur(8px);
+  animation: wakePulse 5.5s ease-in-out infinite;
+}
+
+@keyframes wakePulse {
+  0%, 100% { opacity: 0.45; transform: scaleX(1); }
+  50% { opacity: 0.75; transform: scaleX(1.06); }
+}
+
+@media (max-width: 759px) {
+  .land-hero {
+    align-items: start;
+    min-height: auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0;
+  }
+
+  .land-hero-copy {
+    padding-bottom: 0.5rem;
+  }
+
+  .land-hero-visual {
+    position: relative;
+    right: auto;
+    width: min(100%, 420px);
+    margin: 0.5rem auto -1rem;
+  }
+
+  .land-brand-tag { display: none; }
+}
+
+@media (min-width: 760px) and (max-width: 1023px) {
+  .land-hero-visual {
+    width: min(58vw, 480px);
+    opacity: 0.92;
+  }
+}
+
+/* —— Sections —— */
+.land-section {
+  position: relative;
+  z-index: 10;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4.5rem clamp(1rem, 4vw, 2.5rem);
+}
+
+.land-section-head {
+  max-width: 36rem;
+  margin-bottom: 2.5rem;
+}
+
+.land-section-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1.05;
+  color: #fff8e7;
+}
+
+.land-section-lead {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: rgba(255, 248, 231, 0.72);
+}
+
+/* Route / islands — not a card grid */
+.land-route {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-left: 3px solid rgba(245, 197, 24, 0.35);
+}
+
+.land-island {
+  position: relative;
+  padding: 1.35rem 0 1.35rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 248, 231, 0.1);
+}
+
+.land-island:last-child { border-bottom: 0; }
+
+.land-island::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 1.65rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--straw);
+  border: 2px solid #1a1008;
+  box-shadow: 0 0 0 4px rgba(245, 197, 24, 0.2);
+}
+
+.land-island-mark {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-log);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 224, 122, 0.85);
+}
+
+.land-island h3 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  color: #fff8e7;
+}
+
+.land-island p {
+  margin: 0;
+  max-width: 36rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: rgba(255, 248, 231, 0.7);
+}
+
+@media (min-width: 800px) {
+  .land-route {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2.5rem;
+    border-left: 0;
+    column-gap: 3rem;
+  }
+
+  .land-island {
+    border-left: 3px solid rgba(245, 197, 24, 0.35);
+    padding-left: 1.5rem;
+  }
+}
+
+/* Crew rail */
+.land-crew {
+  background:
+    linear-gradient(180deg, transparent, rgba(6, 21, 39, 0.55) 8%, rgba(6, 21, 39, 0.55) 92%, transparent);
+}
+
+.land-crew-rail {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 700px) {
+  .land-crew-rail {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.land-crew-shot {
+  margin: 0;
+  text-align: center;
+}
+
+.land-crew-shot img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: top center;
+  border: 3px solid #1a1008;
+  border-radius: 0.15rem 1rem 0.2rem 0.9rem;
+  background: #000;
+  box-shadow:
+    inset 0 0 0 2px rgba(245, 197, 24, 0.25),
+    0 12px 28px rgba(0, 0, 0, 0.45);
+  filter: saturate(1.05);
+  transition: transform 220ms ease, filter 220ms ease;
+}
+
+.land-crew-shot:hover img {
+  transform: translateY(-6px) rotate(-1deg);
+  filter: saturate(1.12) brightness(1.05);
+}
+
+.land-crew-shot figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 224, 122, 0.85);
+}
+
+.land-crew-perks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+  max-width: 32rem;
+}
+
+.land-crew-perks li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-weight: 800;
+  color: rgba(255, 248, 231, 0.82);
+}
+
+.land-crew-perks li::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  color: var(--straw);
+  font-size: 0.85rem;
+}
+
+/* Free CTA band */
+.land-free {
+  position: relative;
+  z-index: 10;
+  max-width: 720px;
+  margin: 1rem auto 3rem;
+  padding: 2.5rem clamp(1.25rem, 4vw, 2.5rem);
+  text-align: center;
+  border: 3px solid #1a1008;
+  border-radius: 0.2rem 1.25rem 0.35rem 1.1rem;
+  background:
+    var(--paper-noise),
+    linear-gradient(145deg, #fff6dc 0%, #f3e2b4 45%, #e8ce8a 100%);
+  color: var(--ink);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 250, 230, 0.7),
+    0 0 0 2px rgba(245, 197, 24, 0.35),
+    0 22px 44px rgba(0, 0, 0, 0.4);
+}
+
+.land-free .land-wanted-strip { margin-bottom: 1.1rem; }
+
+.land-free-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 2.85rem);
+  line-height: 1.05;
+  color: var(--sea-navy);
+}
+
+.land-free-lead {
+  margin: 0 auto 1.5rem;
+  max-width: 28rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #5a4630;
+}
+
+.land-free .land-btn-ghost {
+  background: rgba(10, 35, 66, 0.08);
+  color: var(--sea-navy);
+  border-color: rgba(26, 16, 8, 0.35);
+}
+
+.land-free .land-hero-cta { justify-content: center; }
+
+/* Footer */
+.land-footer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem clamp(1rem, 4vw, 2.5rem) 2.5rem;
+  border-top: 1px solid rgba(255, 248, 231, 0.12);
+}
+
+.land-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.land-footer-brand img {
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+.land-footer-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.land-footer-note {
+  margin: 0.15rem 0 0;
+  font-size: 0.75rem;
+  color: rgba(255, 248, 231, 0.5);
+}
+
+/* Reveal motion */
+.land-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+.land-reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.land-hero-copy.land-reveal {
+  opacity: 1;
+  transform: none;
+  animation: heroIn 0.7s ease-out both;
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-wave,
+  .dock-sun,
+  .dock-compass,
+  .dock-sparks,
+  .ship-bob,
+  .land-hero-wake,
+  .land-reveal,
+  .land-hero-copy.land-reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

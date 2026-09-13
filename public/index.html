@@ -1,0 +1,1288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0a2342">
+    <meta name="description" content="Grand Line Tools — notes, password vault, and personal utilities">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=jolly">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png?v=jolly">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png?v=jolly">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pirata+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Nunito", "ui-sans-serif", "system-ui", "sans-serif"],
+              pirate: ["Pirata One", "cursive"],
+            },
+            colors: {
+              sea: { 50:"#eef7ff",100:"#d9ecff",200:"#bcdcff",300:"#8ec6ff",400:"#4aa3ff",500:"#1e7ef0",600:"#0f5fd0",700:"#0a4aa8",800:"#0c3d87",900:"#0a2342",950:"#061527" },
+              straw: { 300:"#ffe07a",400:"#f5c518",500:"#e8a317",600:"#c47f0e" },
+              wanted: { 500:"#c41e3a",600:"#9e1530" },
+              parchment: { 50:"#fffdf7",100:"#fff8e7",200:"#f4e4c1",300:"#e8d4a8" },
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <title>Grand Line Tools</title>
+  </head>
+  <body class="min-h-dvh overflow-hidden font-sans text-sea-950 antialiased">
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="op-sprite" focusable="false">
+      <!-- Jolly Roger skull -->
+      <symbol id="op-skull" viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="28" r="18" fill="#fff8e7" stroke="#0a2342" stroke-width="2.5"/>
+        <ellipse cx="24" cy="26" rx="5" ry="6" fill="#0a2342"/>
+        <ellipse cx="40" cy="26" rx="5" ry="6" fill="#0a2342"/>
+        <path d="M28 36h8M30 40h4" stroke="#0a2342" stroke-width="2" stroke-linecap="round"/>
+        <path d="M18 46c4 6 10 9 14 9s10-3 14-9" stroke="#0a2342" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M22 48v6M32 52v6M42 48v6" stroke="#0a2342" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M12 22c4-10 12-14 20-14s16 4 20 14" stroke="#e8a317" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+    
+      <!-- Straw hat -->
+      <symbol id="op-hat" viewBox="0 0 64 64" fill="none">
+        <ellipse cx="32" cy="42" rx="26" ry="8" fill="#f5c518" stroke="#0a2342" stroke-width="2"/>
+        <path d="M16 42c0-14 7-24 16-24s16 10 16 24" fill="#ffe07a" stroke="#0a2342" stroke-width="2"/>
+        <path d="M14 38h36" stroke="#c41e3a" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="32" cy="28" r="3" fill="#c41e3a"/>
+      </symbol>
+    
+      <!-- Going Merryish ship -->
+      <symbol id="op-ship" viewBox="0 0 64 64" fill="none">
+        <path d="M8 44c6 8 18 12 24 12s18-4 24-12" fill="#0a4aa8" stroke="#0a2342" stroke-width="2"/>
+        <path d="M12 44h40l-4 8H16z" fill="#8b5a2b" stroke="#0a2342" stroke-width="2"/>
+        <path d="M32 12v32" stroke="#5c4033" stroke-width="3" stroke-linecap="round"/>
+        <path d="M34 14l18 10H34z" fill="#fff8e7" stroke="#0a2342" stroke-width="2"/>
+        <path d="M30 18l-12 8h12z" fill="#c41e3a" stroke="#0a2342" stroke-width="2"/>
+        <circle cx="32" cy="10" r="4" fill="#f5c518" stroke="#0a2342" stroke-width="1.5"/>
+      </symbol>
+    
+      <!-- Katana -->
+      <symbol id="op-sword" viewBox="0 0 64 64" fill="none">
+        <path d="M48 8L20 36" stroke="#bcdcff" stroke-width="5" stroke-linecap="round"/>
+        <path d="M48 8L20 36" stroke="#0a2342" stroke-width="2" stroke-linecap="round"/>
+        <path d="M18 38l-6 6" stroke="#c47f0e" stroke-width="4" stroke-linecap="round"/>
+        <path d="M14 34l8 8" stroke="#e8a317" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="14" cy="46" r="4" fill="#c41e3a" stroke="#0a2342" stroke-width="1.5"/>
+        <path d="M42 12l6 6" stroke="#0a2342" stroke-width="2"/>
+      </symbol>
+    
+      <!-- Sea chart / map -->
+      <symbol id="op-map" viewBox="0 0 64 64" fill="none">
+        <path d="M10 14l14-4 16 4 14-4v40l-14 4-16-4-14 4z" fill="#f4e4c1" stroke="#0a2342" stroke-width="2"/>
+        <path d="M24 10v40M40 14v40" stroke="#0a2342" stroke-width="1.5" opacity=".35"/>
+        <path d="M16 28c6-8 12-4 18-10s10 2 14 0" stroke="#0a4aa8" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="44" cy="36" r="5" fill="none" stroke="#c41e3a" stroke-width="2"/>
+        <path d="M44 31v10M39 36h10" stroke="#c41e3a" stroke-width="2"/>
+      </symbol>
+    
+      <!-- Berry coin -->
+      <symbol id="op-berry" viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="22" fill="#f5c518" stroke="#0a2342" stroke-width="2.5"/>
+        <circle cx="32" cy="32" r="16" fill="none" stroke="#c47f0e" stroke-width="2"/>
+        <text x="32" y="40" text-anchor="middle" font-family="Pirata One, Georgia, serif" font-size="22" fill="#0a2342">B</text>
+      </symbol>
+    
+      <!-- Treasure chest -->
+      <symbol id="op-chest" viewBox="0 0 64 64" fill="none">
+        <rect x="10" y="28" width="44" height="24" rx="3" fill="#8b5a2b" stroke="#0a2342" stroke-width="2"/>
+        <path d="M10 28c0-12 10-18 22-18s22 6 22 18" fill="#a0522d" stroke="#0a2342" stroke-width="2"/>
+        <rect x="28" y="34" width="8" height="10" rx="1" fill="#f5c518" stroke="#0a2342" stroke-width="1.5"/>
+        <path d="M10 36h44" stroke="#0a2342" stroke-width="2"/>
+        <circle cx="22" cy="22" r="3" fill="#f5c518"/>
+        <circle cx="42" cy="20" r="2.5" fill="#ffe07a"/>
+      </symbol>
+    
+      <!-- Logbook scroll -->
+      <symbol id="op-scroll" viewBox="0 0 64 64" fill="none">
+        <path d="M16 12h28a6 6 0 010 12H18a4 4 0 00-4 4v24a6 6 0 006 6h28" fill="#fff8e7" stroke="#0a2342" stroke-width="2"/>
+        <path d="M14 16a4 4 0 118 0v4H18a4 4 0 01-4-4z" fill="#f4e4c1" stroke="#0a2342" stroke-width="2"/>
+        <path d="M22 32h24M22 40h18M22 48h20" stroke="#0a4aa8" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+    
+      <!-- Shipwright hammer -->
+      <symbol id="op-hammer" viewBox="0 0 64 64" fill="none">
+        <path d="M28 20l16-10 8 12-16 10z" fill="#7a8a99" stroke="#0a2342" stroke-width="2"/>
+        <path d="M30 28L18 52" stroke="#8b5a2b" stroke-width="6" stroke-linecap="round"/>
+        <path d="M30 28L18 52" stroke="#0a2342" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="48" cy="18" r="3" fill="#c41e3a"/>
+      </symbol>
+    
+      <!-- Gear Second bolt -->
+      <symbol id="op-bolt" viewBox="0 0 64 64" fill="none">
+        <path d="M36 6L16 34h14l-4 24 24-32H34l2-20z" fill="#f5c518" stroke="#0a2342" stroke-width="2.5" stroke-linejoin="round"/>
+      </symbol>
+    
+      <!-- Compass -->
+      <symbol id="op-compass" viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="22" fill="#fff8e7" stroke="#0a2342" stroke-width="2.5"/>
+        <circle cx="32" cy="32" r="16" fill="none" stroke="#0a4aa8" stroke-width="1.5"/>
+        <path d="M32 14v6M32 44v6M14 32h6M44 32h6" stroke="#0a2342" stroke-width="2" stroke-linecap="round"/>
+        <path d="M32 20l6 12-6 12-6-12z" fill="#c41e3a" stroke="#0a2342" stroke-width="1.5"/>
+        <circle cx="32" cy="32" r="3" fill="#f5c518" stroke="#0a2342" stroke-width="1.5"/>
+      </symbol>
+    
+      <!-- Anchor -->
+      <symbol id="op-anchor" viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="14" r="6" fill="none" stroke="#0a2342" stroke-width="3"/>
+        <path d="M32 20v28" stroke="#0a2342" stroke-width="3" stroke-linecap="round"/>
+        <path d="M20 32h24" stroke="#0a2342" stroke-width="3" stroke-linecap="round"/>
+        <path d="M14 40c4 12 12 16 18 16s14-4 18-16" stroke="#0a4aa8" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      </symbol>
+    
+      <!-- Wanted poster -->
+      <symbol id="op-wanted" viewBox="0 0 64 64" fill="none">
+        <rect x="12" y="6" width="40" height="52" rx="2" fill="#f4e4c1" stroke="#0a2342" stroke-width="2"/>
+        <text x="32" y="18" text-anchor="middle" font-family="Pirata One, Georgia, serif" font-size="8" fill="#c41e3a">WANTED</text>
+        <circle cx="32" cy="32" r="10" fill="#ffe07a" stroke="#0a2342" stroke-width="1.5"/>
+        <ellipse cx="28" cy="30" rx="2" ry="2.5" fill="#0a2342"/>
+        <ellipse cx="36" cy="30" rx="2" ry="2.5" fill="#0a2342"/>
+        <path d="M28 36c2 2 6 2 8 0" stroke="#0a2342" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M20 48h24" stroke="#0a2342" stroke-width="2"/>
+      </symbol>
+    
+      <!-- Meat on bone (Luffy) -->
+      <symbol id="op-meat" viewBox="0 0 64 64" fill="none">
+        <path d="M18 40c-6-6-4-18 6-24s20-4 24 4c8 12-2 28-16 28-6 0-10-2-14-8z" fill="#c41e3a" stroke="#0a2342" stroke-width="2"/>
+        <path d="M40 22c4 2 8 8 6 14" stroke="#9e1530" stroke-width="2" stroke-linecap="round"/>
+        <path d="M44 18l10-10" stroke="#fff8e7" stroke-width="4" stroke-linecap="round"/>
+        <path d="M44 18l10-10" stroke="#0a2342" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="52" cy="10" r="3" fill="#fff8e7" stroke="#0a2342" stroke-width="1.5"/>
+      </symbol>
+    
+      <!-- Wave -->
+      <symbol id="op-wave" viewBox="0 0 64 64" fill="none">
+        <path d="M4 36c8-12 16-12 24 0s16 12 24 0 8-12 12-6" stroke="#1e7ef0" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <path d="M4 48c8-10 16-10 24 0s16 10 24 0 8-10 12-4" stroke="#0a4aa8" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </symbol>
+    
+      <!-- Devil fruit -->
+      <symbol id="op-fruit" viewBox="0 0 64 64" fill="none">
+        <ellipse cx="32" cy="36" rx="18" ry="20" fill="#7c3aed" stroke="#0a2342" stroke-width="2"/>
+        <path d="M20 28c6 4 12 4 18 0M22 38c5 3 11 3 16 0M24 48c4 2 8 2 12 0" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round"/>
+        <path d="M32 16c0-6 4-10 8-10" stroke="#2d6a4f" stroke-width="3" stroke-linecap="round"/>
+        <path d="M32 16c4-2 8 0 10 4" stroke="#40916c" stroke-width="2.5" stroke-linecap="round"/>
+      </symbol>
+    
+      <!-- Subquest flag -->
+      <symbol id="op-flag" viewBox="0 0 64 64" fill="none">
+        <path d="M16 8v48" stroke="#5c4033" stroke-width="3" stroke-linecap="round"/>
+        <path d="M18 10h28l-6 10 6 10H18z" fill="#c41e3a" stroke="#0a2342" stroke-width="2"/>
+        <circle cx="28" cy="20" r="4" fill="#fff8e7" stroke="#0a2342" stroke-width="1.5"/>
+      </symbol>
+
+      <!-- Quill -->
+      <symbol id="op-quill" viewBox="0 0 64 64" fill="none">
+        <path d="M48 8c-10 4-22 18-28 34l8 6C40 32 50 18 48 8z" fill="#fff8e7" stroke="#0a2342" stroke-width="2"/>
+        <path d="M20 42L10 56" stroke="#0a2342" stroke-width="3" stroke-linecap="round"/>
+        <path d="M22 36c6 2 12 8 14 14" stroke="#c41e3a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M36 14l8 6" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+
+      <!-- Grand Line sun -->
+      <symbol id="op-sun" viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="12" fill="#f5c518" stroke="#0a2342" stroke-width="2"/>
+        <path d="M32 6v8M32 50v8M6 32h8M50 32h8M12 12l6 6M46 46l6 6M12 52l6-6M46 18l6-6" stroke="#e8a317" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+
+      <!-- Treasure X -->
+      <symbol id="op-xmark" viewBox="0 0 64 64" fill="none">
+        <path d="M16 16l32 32M48 16L16 48" stroke="#c41e3a" stroke-width="6" stroke-linecap="round"/>
+        <path d="M16 16l32 32M48 16L16 48" stroke="#0a2342" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="32" cy="32" r="6" fill="#f5c518" stroke="#0a2342" stroke-width="2"/>
+      </symbol>
+
+      <!-- Rope knot -->
+      <symbol id="op-rope" viewBox="0 0 64 64" fill="none">
+        <path d="M12 32c8-14 32-14 40 0s-8 22-20 14-12-20-4-22 18 10 12 18" stroke="#c47f0e" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path d="M12 32c8-14 32-14 40 0s-8 22-20 14-12-20-4-22 18 10 12 18" stroke="#0a2342" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </symbol>
+
+      <symbol id="ui-expand" viewBox="0 0 24 24" fill="none">
+        <path d="M8 4H4v4M16 4h4v4M8 20H4v-4M20 16v4h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 4l5 5M20 4l-5 5M4 20l5-5M20 20l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ui-compress" viewBox="0 0 24 24" fill="none">
+        <path d="M9 9H5M9 9V5M15 9h4M15 9V5M9 15H5M9 15v4M15 15h4M15 15v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 9L5 5M15 9l4-5M9 15l-4 4M15 15l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ui-width" viewBox="0 0 24 24" fill="none">
+        <rect x="4" y="5" width="16" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 5v14M15 5v14" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="ui-toc" viewBox="0 0 24 24" fill="none">
+        <path d="M4 6h16M4 12h10M4 18h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ui-desk" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="4" width="8" height="16" rx="1.5" stroke="currentColor" stroke-width="2"/>
+        <rect x="13" y="4" width="8" height="16" rx="1.5" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="ui-read" viewBox="0 0 24 24" fill="none">
+        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" stroke="currentColor" stroke-width="2"/>
+        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="ui-back" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="ui-burn" viewBox="0 0 24 24" fill="none">
+        <path d="M12 3c2 3 5 4.5 5 8a5 5 0 11-10 0c0-2 1.2-3.5 2.2-4.5C10 9 11 8 12 3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="ui-save" viewBox="0 0 24 24" fill="none">
+        <path d="M5 3h11l3 3v15H5V3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M8 3v6h8V3M8 21v-7h8v7" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+    </svg>
+    
+
+    <div class="sea-backdrop" aria-hidden="true">
+      <div class="wave wave-1"></div>
+      <div class="wave wave-2"></div>
+      <div class="wave wave-3"></div>
+      <div class="map-grain"></div>
+      <div class="straw-particles" aria-hidden="true"></div>
+    </div>
+
+    <main id="app" class="app relative z-10 h-dvh">
+      <div class="dashboard">
+        <aside id="sidebar" class="sidebar">
+          <div class="sidebar-brand">
+            <img id="sidebar-jolly-roger" class="sidebar-brand-mark" src="/assets/jolly-roger.png?v=2" alt="" width="44" height="44">
+            <div>
+              <p class="font-pirate text-xl leading-none sidebar-brand-title">Grand Line</p>
+              <p class="mt-0.5 text-[11px] font-bold uppercase tracking-[0.16em] sidebar-brand-sub">Tools</p>
+            </div>
+            <button id="sidebar-close" class="sidebar-close lg:hidden" type="button" aria-label="Close menu">✕</button>
+          </div>
+
+          <nav class="sidebar-nav" aria-label="Main">
+            <button class="nav-item active" type="button" data-view="overview"><span class="nav-ico" aria-hidden="true">◈</span> Overview</button>
+            <button class="nav-item" type="button" data-view="profile"><span class="nav-ico" aria-hidden="true">★</span> Captain</button>
+            <button class="nav-item" type="button" data-view="notes"><span class="nav-ico" aria-hidden="true">📜</span> Notes</button>
+            <button class="nav-item" type="button" data-view="vault"><span class="nav-ico" aria-hidden="true">💰</span> Treasure vault</button>
+            <button class="nav-item" type="button" data-view="quests"><span class="nav-ico" aria-hidden="true">⚔</span> Quests</button>
+            <button class="nav-item" type="button" data-view="charts"><span class="nav-ico" aria-hidden="true">🗺</span> Sea charts</button>
+            <button class="nav-item" type="button" data-view="snippets"><span class="nav-ico" aria-hidden="true">✦</span> Snippets</button>
+            <button class="nav-item" type="button" data-view="berries"><span class="nav-ico" aria-hidden="true">🍒</span> Berry pouch</button>
+            <button class="nav-item" type="button" data-view="watchtower"><span class="nav-ico" aria-hidden="true">🔔</span> Watchtower</button>
+            <button class="nav-item" type="button" data-view="focus"><span class="nav-ico" aria-hidden="true">⚡</span> Gear Second</button>
+          </nav>
+
+          <div class="sidebar-cats" id="notes-sidebar-extras">
+            <p class="sidebar-section-label">Crew tags</p>
+            <div id="sidebar-tags" class="sidebar-tag-list" aria-label="Filter by tag"></div>
+            <p id="sidebar-tags-empty" class="sidebar-empty-hint">Tag notes to chart routes here.</p>
+          </div>
+
+          <footer class="sidebar-foot">
+            <p class="font-pirate text-sm sidebar-foot-title">Personal toolkit</p>
+            <p class="text-[11px] sidebar-foot-sub">Encrypted vault · Markdown logs</p>
+          </footer>
+        </aside>
+
+        <div id="sidebar-backdrop" class="sidebar-backdrop lg:hidden" hidden></div>
+
+        <div class="main-column">
+          <header class="top-header">
+            <button id="menu-button" class="menu-button lg:hidden" type="button" aria-label="Open menu">☰</button>
+            <label class="search-shell" id="search-shell">
+              <span class="visually-hidden">Search</span>
+              <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-3.5-3.5" stroke-linecap="round"></path>
+              </svg>
+              <input id="search" type="search" placeholder="Search..." autocomplete="off">
+            </label>
+            <button id="command-palette-btn" class="palette-trigger" type="button" title="Command palette (Ctrl+K)">⌘K</button>
+            <div class="header-user">
+              <button id="header-profile-btn" class="header-profile-btn" type="button" title="Open captain profile">
+                <img id="header-avatar" class="avatar avatar-img" src="/assets/crew-captain.png?v=2" alt="" width="38" height="38">
+                <div class="user-meta">
+                  <p id="header-hello" class="user-hello">Hello, Captain!</p>
+                  <p id="header-status" class="notes-count">Ready</p>
+                </div>
+              </button>
+              <details class="captain-menu">
+                <summary class="captain-menu-trigger" aria-label="Captain menu">⋯</summary>
+                <div class="captain-menu-panel" role="menu">
+                  <button id="menu-profile-btn" class="captain-menu-item captain-menu-item-neutral" type="button" role="menuitem">Captain profile</button>
+                  <button id="lock-button" class="captain-menu-item" type="button" role="menuitem">Log out</button>
+                </div>
+              </details>
+            </div>
+          </header>
+
+          <!-- OVERVIEW -->
+          <section id="view-overview" class="tool-view" data-panel>
+            <div class="view-pad">
+              <div class="panel-sky" aria-hidden="true">
+                <img class="notes-sky-ship ship-bob" src="/assets/ship-hero.png?v=2" alt="" width="280" height="150">
+                <img class="notes-sky-roger" src="/assets/jolly-roger.png?v=2" alt="" width="88" height="88">
+                <svg class="notes-sky-sun" focusable="false"><use href="#op-sun"/></svg>
+                <svg class="notes-sky-wave notes-sky-wave-a" focusable="false"><use href="#op-wave"/></svg>
+                <svg class="notes-sky-hat" focusable="false"><use href="#op-hat"/></svg>
+              </div>
+              <div class="logbook-hero" data-banner="WANTED · DECK">
+                <div class="logbook-hero-seal" aria-hidden="true">
+                  <svg class="op-ico op-ico-lg" focusable="false"><use href="#op-ship"/></svg>
+                </div>
+                <div class="logbook-hero-copy">
+                  <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-ship"/></svg> Captain's deck</p>
+                  <h2 class="font-pirate text-3xl text-sea-900">Your personal Grand Line</h2>
+                  <p class="view-lede logbook-lede">Notes, secrets, quests, charts, snippets, berries, and focus — all aboard one ship.</p>
+                </div>
+                <button class="btn-primary add-note-btn toolbar-cta logbook-new-btn" type="button" data-view-jump="notes">
+                  <svg class="op-ico" aria-hidden="true"><use href="#op-quill"/></svg> Open logbook
+                </button>
+                <div class="logbook-hero-deco" aria-hidden="true">
+                  <svg class="op-ico"><use href="#op-hat"/></svg>
+                  <svg class="op-ico"><use href="#op-chest"/></svg>
+                  <svg class="op-ico"><use href="#op-sword"/></svg>
+                  <svg class="op-ico"><use href="#op-map"/></svg>
+                </div>
+                <div class="logbook-hero-stamp" aria-hidden="true">SET SAIL</div>
+              </div>
+              <div id="overview-stats" class="stats-grid"></div>
+              <div id="crew-cards" class="crew-cards" aria-label="Crew tool shortcuts"></div>
+            </div>
+          </section>
+
+          <!-- CAPTAIN PROFILE -->
+          <section id="view-profile" class="tool-view" data-panel hidden>
+            <div class="view-pad profile-layout">
+              <div class="panel-sky" aria-hidden="true">
+                <img class="notes-sky-roger" src="/assets/jolly-roger.png?v=2" alt="" width="88" height="88">
+                <svg class="notes-sky-sun" focusable="false"><use href="#op-sun"/></svg>
+                <svg class="notes-sky-anchor" focusable="false"><use href="#op-anchor"/></svg>
+              </div>
+              <div class="logbook-hero" data-banner="WANTED · CAPTAIN">
+                <div class="logbook-hero-seal" aria-hidden="true">
+                  <svg class="op-ico op-ico-lg" focusable="false"><use href="#op-wanted"/></svg>
+                </div>
+                <div class="logbook-hero-copy">
+                  <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-wanted"/></svg> Wanted poster</p>
+                  <h2 class="font-pirate text-3xl text-sea-900">Captain profile</h2>
+                  <p class="view-lede logbook-lede">Your bounty, league, and crew board — inked on official parchment.</p>
+                </div>
+                <button id="profile-edit-btn" class="btn-primary add-note-btn toolbar-cta logbook-new-btn" type="button">
+                  <svg class="op-ico" aria-hidden="true"><use href="#op-quill"/></svg> Edit name
+                </button>
+                <div class="logbook-hero-deco" aria-hidden="true">
+                  <svg class="op-ico"><use href="#op-hat"/></svg>
+                  <svg class="op-ico"><use href="#op-flag"/></svg>
+                  <svg class="op-ico"><use href="#op-compass"/></svg>
+                </div>
+                <div class="logbook-hero-stamp" aria-hidden="true">BOUNTY</div>
+              </div>
+
+              <section class="profile-hero parchment-card">
+                <img id="profile-avatar" class="profile-avatar" src="/assets/crew-captain.png?v=2" alt="" width="112" height="112">
+                <div class="profile-hero-copy">
+                  <p id="profile-status-message" class="profile-status">Set sail!</p>
+                  <h3 id="profile-username" class="profile-username">Captain</h3>
+                  <p id="profile-bounty" class="profile-bounty-line">Bounty —</p>
+                  <p id="profile-title" class="profile-title-line">Rookie pirate</p>
+                  <p id="profile-bio" class="profile-bio">Sailing the Grand Line with notes, quests, and treasure.</p>
+                  <div class="profile-meta-row">
+                    <span id="profile-location" class="profile-chip">Unknown seas</span>
+                    <span id="profile-crew" class="profile-chip">Straw Hats</span>
+                  </div>
+                </div>
+                <div class="profile-share-card">
+                  <p class="profile-share-label"><svg class="op-ico" aria-hidden="true"><use href="#op-wanted"/></svg> Captain ID</p>
+                  <p id="profile-share-id" class="profile-share-id">CAPT-------</p>
+                  <div class="profile-share-actions">
+                    <button id="profile-copy-id" class="secondary-btn" type="button">Copy ID</button>
+                  </div>
+                  <p class="profile-share-hint">Your Captain ID is fixed — share it so other captains can add you.</p>
+                </div>
+              </section>
+
+              <section class="profile-rank-grid">
+                <article class="profile-rank-card parchment-card">
+                  <p class="profile-rank-kicker"><svg class="op-ico" aria-hidden="true"><use href="#op-hat"/></svg> League</p>
+                  <p id="profile-league" class="profile-rank-value">Cabin Boy</p>
+                  <p id="profile-rank" class="profile-rank-sub">Rank E</p>
+                  <div class="profile-rank-bar"><span id="profile-rank-bar"></span></div>
+                  <p id="profile-rank-next" class="profile-rank-next">Next league soon</p>
+                </article>
+                <article class="profile-rank-card parchment-card">
+                  <p class="profile-rank-kicker"><svg class="op-ico" aria-hidden="true"><use href="#op-berry"/></svg> Bounty points</p>
+                  <p id="profile-points" class="profile-rank-value">0</p>
+                  <p id="profile-points-breakdown" class="profile-rank-sub">Quests + focus + challenges</p>
+                </article>
+                <article class="profile-rank-card parchment-card">
+                  <p class="profile-rank-kicker"><svg class="op-ico" aria-hidden="true"><use href="#op-compass"/></svg> Voyage record</p>
+                  <p id="profile-record" class="profile-rank-value profile-rank-value-sm">0 quests</p>
+                  <p id="profile-record-sub" class="profile-rank-sub">Focus logged</p>
+                </article>
+              </section>
+
+              <div class="profile-columns">
+                <section class="profile-panel parchment-card">
+                  <div class="profile-panel-head">
+                    <h3><svg class="op-ico" aria-hidden="true"><use href="#op-flag"/></svg> In-game challenges</h3>
+                    <p>Earn bonus bounty by clearing voyage goals.</p>
+                  </div>
+                  <div id="profile-challenges" class="profile-challenges"></div>
+                </section>
+
+                <section class="profile-panel parchment-card">
+                  <div class="profile-panel-head">
+                    <h3><svg class="op-ico" aria-hidden="true"><use href="#op-ship"/></svg> Crew friends</h3>
+                    <p>Add captains by ID. Chat comes later.</p>
+                  </div>
+                  <form id="friend-form" class="friend-form">
+                    <label>Captain ID<input id="friend-share-id" class="field" required maxlength="24" placeholder="CAPT-ABC123"></label>
+                    <div id="friend-preview" class="friend-preview" hidden></div>
+                    <label>Display name<input id="friend-username" class="field" maxlength="40" placeholder="Optional nickname"></label>
+                    <label>Note<input id="friend-note" class="field" maxlength="200" placeholder="Met at Sabaody..."></label>
+                    <button id="friend-lookup-btn" class="secondary-btn" type="button">Preview captain</button>
+                    <button class="btn-primary rounded-xl px-5 py-2.5 font-extrabold" type="submit">Add friend</button>
+                  </form>
+                  <div id="friends-list" class="friends-list" aria-label="Friends"></div>
+                  <p id="friends-empty" class="profile-empty-hint">No friends yet — trade Captain IDs and add your crew.</p>
+                </section>
+              </div>
+
+              <section class="profile-panel parchment-card">
+                <div class="profile-panel-head">
+                  <h3><svg class="op-ico" aria-hidden="true"><use href="#op-scroll"/></svg> Extra info & links</h3>
+                  <p>Anything else you want on your wanted poster.</p>
+                </div>
+                <div id="profile-links" class="profile-links"></div>
+                <p id="profile-links-empty" class="profile-empty-hint">No links yet — add some in Edit profile.</p>
+              </section>
+
+              <section class="profile-panel parchment-card">
+                <div class="profile-panel-head">
+                  <h3><svg class="op-ico" aria-hidden="true"><use href="#op-compass"/></svg> Discover captains</h3>
+                  <p>Find other crew members on this ship and view their wanted posters.</p>
+                </div>
+                <form id="discover-form" class="friend-form">
+                  <label>Search captains<input id="discover-query" class="field" maxlength="80" placeholder="Name, crew, location, or CAPT-ID"></label>
+                  <button class="btn-primary rounded-xl px-5 py-2.5 font-extrabold" type="submit">Search crew</button>
+                </form>
+                <div id="discover-list" class="discover-grid" aria-label="Discovered captains"></div>
+                <p id="discover-empty" class="profile-empty-hint">Search for captains or browse the crew roster.</p>
+              </section>
+            </div>
+
+            <div id="captain-modal" class="tool-modal" hidden>
+              <div class="tool-modal-backdrop" data-close-modal="captain"></div>
+              <article id="captain-modal-card" class="captain-modal-card parchment-card tool-modal-panel" role="dialog" aria-modal="true" aria-label="Captain wanted poster"></article>
+            </div>
+
+            <div id="profile-modal" class="tool-modal" hidden>
+              <div class="tool-modal-backdrop" data-close-modal="profile"></div>
+              <form id="profile-form" class="profile-form parchment-card tool-modal-panel" role="dialog" aria-modal="true" aria-label="Edit captain name">
+                <header class="vault-form-head">
+                  <div class="title-with-icon">
+                    <span class="op-badge" aria-hidden="true"><svg class="op-ico op-ico-lg" aria-hidden="true"><use href="#op-wanted"/></svg></span>
+                    <div>
+                      <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-hat"/></svg> Rewrite the poster</p>
+                      <h3 class="vault-form-title">Edit name</h3>
+                    </div>
+                  </div>
+                </header>
+                <label>Captain name<input id="profile-edit-username" class="field" required maxlength="40"></label>
+                <p class="profile-field-hint">Only your name can be changed. Bounty, league, and the rest stay system-inked.</p>
+                <div class="vault-form-actions">
+                  <button id="profile-form-cancel" class="secondary-btn" type="button">Cancel</button>
+                  <button class="btn-primary rounded-xl px-5 py-2.5 font-extrabold" type="submit">Save name</button>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <!-- NOTES -->
+          <section id="view-notes" class="tool-view" data-panel hidden>
+            <div id="notes-panel" class="notes-panel">
+              <div class="notes-sky" aria-hidden="true">
+                <img class="notes-sky-ship ship-bob" src="/assets/ship-hero.png?v=2" alt="" width="280" height="150">
+                <img class="notes-sky-roger" src="/assets/jolly-roger.png?v=2" alt="" width="88" height="88">
+                <svg class="notes-sky-sun" focusable="false"><use href="#op-sun"/></svg>
+                <svg class="notes-sky-wave notes-sky-wave-a" focusable="false"><use href="#op-wave"/></svg>
+                <svg class="notes-sky-wave notes-sky-wave-b" focusable="false"><use href="#op-wave"/></svg>
+                <svg class="notes-sky-hat" focusable="false"><use href="#op-hat"/></svg>
+                <svg class="notes-sky-anchor" focusable="false"><use href="#op-anchor"/></svg>
+              </div>
+              <div class="logbook-hero">
+                <div class="logbook-hero-seal" aria-hidden="true">
+                  <svg class="op-ico op-ico-lg" focusable="false"><use href="#op-skull"/></svg>
+                </div>
+                <div class="logbook-hero-copy">
+                  <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-quill"/></svg> Captain's logbook</p>
+                  <h2 class="font-pirate text-3xl text-sea-900">Voyage logs</h2>
+                  <p class="view-lede logbook-lede">Ink the Grand Line on parchment — each entry a page torn from the Merry's desk.</p>
+                </div>
+                <button id="new-button" class="btn-primary add-note-btn toolbar-cta logbook-new-btn" type="button">
+                  <svg class="op-ico" aria-hidden="true"><use href="#op-quill"/></svg> Ink a new page
+                </button>
+                <div class="logbook-hero-deco" aria-hidden="true">
+                  <svg class="op-ico"><use href="#op-hat"/></svg>
+                  <svg class="op-ico"><use href="#op-meat"/></svg>
+                  <svg class="op-ico"><use href="#op-sword"/></svg>
+                  <svg class="op-ico"><use href="#op-map"/></svg>
+                </div>
+                <div class="logbook-hero-stamp" aria-hidden="true">OFFICIAL LOG</div>
+              </div>
+              <div class="logbook-rail">
+                <p class="logbook-rail-label"><svg class="op-ico" aria-hidden="true"><use href="#op-compass"/></svg> Chart by tag</p>
+                <div id="tag-filters" class="tag-filters" aria-label="Filter by tag"></div>
+              </div>
+              <section id="notes-list" class="notes-grid" aria-label="All notes"></section>
+              <section id="empty-list" class="empty-state logbook-empty" hidden>
+                <div class="empty-wanted" aria-hidden="true">
+                  <p class="empty-wanted-banner">WANTED</p>
+                  <div class="empty-wanted-icons">
+                    <svg focusable="false"><use href="#op-skull"/></svg>
+                    <svg focusable="false"><use href="#op-quill"/></svg>
+                    <svg focusable="false"><use href="#op-hat"/></svg>
+                  </div>
+                  <p class="empty-wanted-bounty">LOG · ??? BERRY</p>
+                </div>
+                <h2 class="font-pirate text-3xl text-sea-900">Blank parchment</h2>
+                <p>No voyage entries yet — dip the quill and start the first page.</p>
+                <button id="empty-new-button" class="btn-primary mt-5 rounded-xl px-6 py-3 font-extrabold" type="button">Write first log</button>
+              </section>
+            </div>
+
+            <section id="editor-panel" class="editor-panel log-desk" aria-label="Note editor">
+              <header class="editor-toolbar log-toolbar">
+                <button id="back-button" class="icon-btn" type="button" aria-label="Back to notes" title="Close log">
+                  <svg class="ui-ico" focusable="false"><use href="#ui-back"/></svg>
+                </button>
+                <div class="editor-toolbar-center">
+                  <div id="save-status" class="save-status" role="status">New note</div>
+                </div>
+                <div class="log-toolbar-end">
+                  <button id="delete-button" class="icon-btn icon-btn-danger" type="button" hidden aria-label="Burn page" title="Burn page">
+                    <svg class="ui-ico" focusable="false"><use href="#ui-burn"/></svg>
+                  </button>
+                  <div class="mode-tabs mode-tabs-icons" role="tablist" aria-label="Editor view">
+                    <button id="write-tab" class="mode-tab icon-btn" type="button" role="tab" aria-selected="false" aria-label="Quill — write only" title="Quill">
+                      <svg class="ui-ico" focusable="false"><use href="#op-quill"/></svg>
+                    </button>
+                    <button id="split-tab" class="mode-tab icon-btn active" type="button" role="tab" aria-selected="true" aria-label="Desk — write and preview" title="Desk">
+                      <svg class="ui-ico" focusable="false"><use href="#ui-desk"/></svg>
+                    </button>
+                    <button id="preview-tab" class="mode-tab icon-btn" type="button" role="tab" aria-selected="false" aria-label="Read — preview only" title="Read">
+                      <svg class="ui-ico" focusable="false"><use href="#ui-read"/></svg>
+                    </button>
+                  </div>
+                  <button id="save-button" class="icon-btn icon-btn-primary" type="button" aria-label="Save log" title="Save">
+                    <svg class="ui-ico" focusable="false"><use href="#ui-save"/></svg>
+                  </button>
+                </div>
+              </header>
+
+              <div class="editor-workspace log-parchment">
+                <div class="editor-meta">
+                  <label class="visually-hidden" for="note-title">Title</label>
+                  <input id="note-title" class="title-input" type="text" placeholder="Log title…" maxlength="200">
+                  <label class="visually-hidden" for="note-tags">Tags</label>
+                  <input id="note-tags" class="tags-input" type="text" placeholder="Tags: adventure, crew…">
+                </div>
+
+                <div class="md-toolbar" role="toolbar" aria-label="Markdown shortcuts">
+                  <button type="button" data-md="bold" title="Bold" aria-label="Bold"><b>B</b></button>
+                  <button type="button" data-md="italic" title="Italic" aria-label="Italic"><i>I</i></button>
+                  <button type="button" data-md="h2" title="Heading" aria-label="Heading">H</button>
+                  <button type="button" data-md="ul" title="Bullet list" aria-label="Bullet list">•</button>
+                  <button type="button" data-md="ol" title="Numbered list" aria-label="Numbered list">1.</button>
+                  <button type="button" data-md="check" title="Checklist" aria-label="Checklist">☑</button>
+                  <button type="button" data-md="code" title="Code" aria-label="Code">&lt;/&gt;</button>
+                  <button type="button" data-md="link" title="Link" aria-label="Link">🔗</button>
+                  <button type="button" data-md="image" title="Image / GIF" aria-label="Image">🖼</button>
+                  <button type="button" data-md="youtube" title="YouTube embed" aria-label="YouTube">▶</button>
+                  <button type="button" data-md="table" title="Table" aria-label="Table">▦</button>
+                  <button type="button" data-md="quote" title="Quote" aria-label="Quote">“</button>
+                </div>
+
+                <div class="editor-split split-mode">
+                  <div class="write-pane">
+                    <label class="visually-hidden" for="note-content">Markdown note</label>
+                    <textarea id="note-content" class="note-content" placeholder="Dear logbook…"></textarea>
+                  </div>
+
+                  <div class="preview-pane">
+                    <div class="preview-chrome">
+                      <span id="preview-meta" class="preview-meta"></span>
+                      <div class="preview-chrome-actions">
+                        <button id="preview-toc-btn" class="icon-btn preview-chrome-btn" type="button" aria-pressed="false" aria-label="Table of contents" title="Contents">
+                          <svg class="ui-ico" focusable="false"><use href="#ui-toc"/></svg>
+                        </button>
+                        <button id="preview-width-btn" class="icon-btn preview-chrome-btn" type="button" aria-pressed="false" aria-label="Reader width" title="Reader width">
+                          <svg class="ui-ico" focusable="false"><use href="#ui-width"/></svg>
+                        </button>
+                        <button id="preview-fullscreen-btn" class="icon-btn preview-chrome-btn" type="button" aria-pressed="false" aria-label="Fullscreen" title="Fullscreen (F)">
+                          <svg class="ui-ico" focusable="false"><use id="preview-fullscreen-icon" href="#ui-expand"/></svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="preview-body">
+                      <nav id="preview-toc" class="preview-toc" hidden aria-label="Table of contents"></nav>
+                      <article id="preview" class="preview markdown-body" aria-live="polite"></article>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </section>
+
+          <div id="preview-lightbox" class="preview-lightbox" hidden>
+            <button id="preview-lightbox-close" class="preview-lightbox-close" type="button" aria-label="Close image">✕</button>
+            <img id="preview-lightbox-image" alt="">
+          </div>
+
+          <!-- VAULT -->
+          <section id="view-vault" class="tool-view" data-panel hidden>
+            <div class="view-pad vault-layout">
+              <div class="panel-sky" aria-hidden="true">
+                <img class="notes-sky-ship ship-bob" src="/assets/ship-hero.png?v=2" alt="" width="240" height="130">
+                <svg class="notes-sky-sun" focusable="false"><use href="#op-sun"/></svg>
+                <svg class="notes-sky-wave notes-sky-wave-b" focusable="false"><use href="#op-wave"/></svg>
+              </div>
+              <div class="logbook-hero" data-banner="WANTED · TREASURE">
+                <div class="logbook-hero-seal" aria-hidden="true">
+                  <svg class="op-ico op-ico-lg" focusable="false"><use href="#op-chest"/></svg>
+                </div>
+                <div class="logbook-hero-copy">
+                  <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-chest"/></svg> Nami's chest</p>
+                  <h2 class="font-pirate text-3xl text-sea-900">Treasure vault</h2>
+                  <p class="view-lede logbook-lede">Stash logins and API keys — encrypted on disk, sealed like pirate gold.</p>
+                </div>
+                <button id="vault-new" class="btn-primary add-note-btn toolbar-cta logbook-new-btn" type="button">
+                  <svg class="op-ico" aria-hidden="true"><use href="#op-skull"/></svg> Add secret
+                </button>
+                <div class="logbook-hero-deco" aria-hidden="true">
+                  <svg class="op-ico"><use href="#op-berry"/></svg>
+                  <svg class="op-ico"><use href="#op-chest"/></svg>
+                  <svg class="op-ico"><use href="#op-skull"/></svg>
+                </div>
+                <div class="logbook-hero-stamp" aria-hidden="true">AES SEALED</div>
+              </div>
+
+              <section id="vault-list" class="vault-list" aria-label="Vault entries"></section>
+              <section id="vault-empty" class="empty-state" hidden>
+                <div class="empty-poster" aria-hidden="true">$$$</div>
+                <h2 class="font-pirate text-3xl text-sea-900">Vault is empty</h2>
+                <p>Stash logins and API keys here — encrypted on disk.</p>
+              </section>
+
+              <div id="vault-modal" class="tool-modal" hidden>
+                <div class="tool-modal-backdrop" data-close-modal="vault"></div>
+                <form id="vault-form" class="vault-form parchment-card tool-modal-panel" role="dialog" aria-modal="true" aria-label="Vault entry">
+                  <input type="hidden" id="vault-id">
+                  <input type="hidden" id="vault-icon" value="">
+                  <header class="vault-form-head">
+                    <div class="title-with-icon">
+                      <span class="op-badge" aria-hidden="true"><svg class="op-ico op-ico-lg" aria-hidden="true"><use href="#op-chest"/></svg></span>
+                      <div>
+                        <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-skull"/></svg> Treasure seal</p>
+                        <h3 class="vault-form-title">Secret details</h3>
+                      </div>
+                    </div>
+                    <div id="vault-icon-preview" class="vault-icon-preview" aria-hidden="true">
+                      <span class="vault-icon-fallback">⚜</span>
+                    </div>
+                  </header>
+                  <section class="vault-icon-section" aria-label="Secret icon">
+                    <div class="vault-icon-section-top">
+                      <div>
+                        <p class="vault-icon-label">Company icon</p>
+                        <p class="vault-icon-hint">Auto-detect from URL/title, pick a brand, or paste an image link.</p>
+                      </div>
+                      <div class="vault-icon-actions">
+                        <button id="vault-icon-auto" class="secondary-btn" type="button">Auto</button>
+                        <button id="vault-icon-clear" class="secondary-btn" type="button">Clear</button>
+                      </div>
+                    </div>
+                    <div id="vault-icon-picks" class="vault-icon-picks" aria-label="Popular brand icons"></div>
+                    <label class="vault-icon-url-label">Custom image link<input id="vault-icon-url" class="field" type="url" maxlength="500" placeholder="https://…/logo.png"></label>
+                  </section>
+                  <div class="vault-form-fields">
+                    <label>Title<input id="vault-title" class="field" required maxlength="120" placeholder="GitHub"></label>
+                    <label>Username / email<input id="vault-username" class="field" maxlength="200" autocomplete="off"></label>
+                    <label>Password
+                      <div class="password-gen-row">
+                        <input id="vault-password" class="field" type="text" maxlength="200" autocomplete="off">
+                        <button id="vault-generate" class="secondary-btn" type="button">Generate</button>
+                        <button id="vault-copy" class="secondary-btn" type="button">Copy</button>
+                      </div>
+                    </label>
+                    <label>URL<input id="vault-url" class="field" maxlength="500" placeholder="https://"></label>
+                    <label>Notes<textarea id="vault-notes" class="field" rows="3" maxlength="2000"></textarea></label>
+                  </div>
+                  <div class="vault-form-actions">
+                    <button id="vault-delete" class="danger-text" type="button" hidden>Delete</button>
+                    <button id="vault-cancel" class="secondary-btn" type="button">Cancel</button>
+                    <button class="btn-primary rounded-xl px-5 py-2.5 font-extrabold" type="submit">Save secret</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          <!-- QUESTS -->
+          <section id="view-quests" class="tool-view" data-panel hidden>
+            <div class="view-pad">
+              <div class="panel-sky" aria-hidden="true">
+                <svg class="notes-sky-hat" focusable="false"><use href="#op-hat"/></svg>
+                <svg class="notes-sky-anchor" focusable="false"><use href="#op-anchor"/></svg>
+                <svg class="notes-sky-wave notes-sky-wave-a" focusable="false"><use href="#op-wave"/></svg>
+              </div>
+              <div class="logbook-hero" data-banner="WANTED · QUESTS">
+                <div class="logbook-hero-seal" aria-hidden="true">
+                  <svg class="op-ico op-ico-lg" focusable="false"><use href="#op-sword"/></svg>
+                </div>
+                <div class="logbook-hero-copy">
+                  <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-sword"/></svg> Swordsman's board</p>
+                  <h2 class="font-pirate text-3xl text-sea-900">Quests</h2>
+                  <p class="view-lede logbook-lede">Ranked missions with subquests — chart the bounty, then clear every objective.</p>
+                </div>
+                <button id="quest-new" class="btn-primary add-note-btn toolbar-cta logbook-new-btn" type="button">
+                  <svg class="op-ico" aria-hidden="true"><use href="#op-flag"/></svg> New quest
+                </button>
+                <div class="logbook-hero-deco" aria-hidden="true">
+                  <svg class="op-ico"><use href="#op-sword"/></svg>
+                  <svg class="op-ico"><use href="#op-flag"/></svg>
+                  <svg class="op-ico"><use href="#op-xmark"/></svg>
+                </div>
+                <div class="logbook-hero-stamp" aria-hidden="true">RANKED</div>
+              </div>
+
+              <div class="logbook-rail">
+                <p class="logbook-rail-label"><svg class="op-ico" aria-hidden="true"><use href="#op-compass"/></svg> Filter by rank</p>
+                <div id="quest-level-filters" class="quest-level-filters tag-filters" aria-label="Filter by rank">
+                  <button type="button" class="quest-level-filter tag-filter active" data-level="">All</button>
+                  <button type="button" class="quest-level-filter tag-filter" data-level="S">S</button>
+                  <button type="button" class="quest-level-filter tag-filter" data-level="A">A</button>
+                  <button type="button" class="quest-level-filter tag-filter" data-level="B">B</button>
+                  <button type="button" class="quest-level-filter tag-filter" data-level="C">C</button>
+                  <button type="button" class="quest-level-filter tag-filter" data-level="D">D</button>
+                </div>
+              </div>
+
+              <section id="quests-list" class="quests-list" aria-label="Quests"></section>
+
+              <div id="quest-modal" class="tool-modal" hidden>
+                <div class="tool-modal-backdrop" data-close-modal="quest"></div>
+                <form id="quest-form" class="quest-form parchment-card tool-modal-panel" role="dialog" aria-modal="true" aria-label="Quest editor">
+                  <input type="hidden" id="quest-id">
+                  <header class="vault-form-head">
+                    <div class="title-with-icon">
+                      <span class="op-badge" aria-hidden="true"><svg class="op-ico op-ico-lg" aria-hidden="true"><use href="#op-sword"/></svg></span>
+                      <div>
+                        <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-flag"/></svg> Swordsman's board</p>
+                        <h3 class="vault-form-title">Post a bounty</h3>
+                      </div>
+                    </div>
+                  </header>
+                  <label>Title<input id="quest-title" class="field" required maxlength="200" placeholder="Liberate the island..."></label>
+                  <div class="quest-form-row">
+                    <label>Rank
+                      <select id="quest-level" class="field">
+                        <option value="D">D — Easy</option>
+                        <option value="C" selected>C — Normal</option>
+                        <option value="B">B — Hard</option>
+                        <option value="A">A — Extreme</option>
+                        <option value="S">S — Legendary</option>
+                      </select>
+                    </label>
+                    <label>Due date<input id="quest-due" class="field" type="date"></label>
+                  </div>
+                  <label>Description<textarea id="quest-description" class="field" rows="3" maxlength="2000" placeholder="What is this quest about?"></textarea></label>
+                  <label>Captain's notes<textarea id="quest-notes" class="field" rows="2" maxlength="2000" placeholder="Extra intel, links, reminders..."></textarea></label>
+                  <div class="subquest-block">
+                    <div class="subquest-block-head">
+                      <p class="subquest-block-title"><svg class="op-ico" aria-hidden="true"><use href="#op-flag"/></svg> Subquests</p>
+                      <button id="quest-add-sub" class="secondary-btn" type="button">+ Add subquest</button>
+                    </div>
+                    <div id="quest-subquests" class="quest-subquests"></div>
+                  </div>
+                  <label class="quest-done-row"><input id="quest-done" type="checkbox"> Mark quest complete</label>
+                  <div class="vault-form-actions">
+                    <button id="quest-delete" class="danger-text" type="button" hidden>Delete</button>
+                    <button id="quest-cancel" class="secondary-btn" type="button">Cancel</button>
+                    <button class="btn-primary rounded-xl px-5 py-2.5 font-extrabold" type="submit">Save quest</button>
+                  </div>
+                </form>
+              </div>
+
+              <section id="quests-empty" class="empty-state" hidden>
+                <h2 class="font-pirate text-3xl text-sea-900">No open quests</h2>
+                <p>Post a ranked mission and break it into subquests.</p>
+              </section>
+            </div>
+          </section>
+
+          <!-- SEA CHARTS -->
+          <section id="view-charts" class="tool-view" data-panel hidden>
+            <div class="view-pad">
+              <div class="panel-sky" aria-hidden="true">
+                <img class="notes-sky-ship ship-bob" src="/assets/ship-hero.png?v=2" alt="" width="220" height="120">
+                <svg class="notes-sky-sun" focusable="false"><use href="#op-sun"/></svg>
+                <svg class="notes-sky-wave notes-sky-wave-a" focusable="false"><use href="#op-wave"/></svg>
+              </div>
+              <div class="logbook-hero" data-banner="WANTED · CHARTS">
+                <div class="logbook-hero-seal" aria-hidden="true">
+                  <svg class="op-ico op-ico-lg" focusable="false"><use href="#op-map"/></svg>
+                </div>
+                <div class="logbook-hero-copy">
+                  <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-map"/></svg> Navigator's charts</p>
+                  <h2 class="font-pirate text-3xl text-sea-900">Sea charts</h2>
+                  <p class="view-lede logbook-lede">Bookmark useful routes across the Grand Line web.</p>
+                </div>
+                <button id="charts-new" class="btn-primary add-note-btn toolbar-cta logbook-new-btn" type="button">
+                  <svg class="op-ico" aria-hidden="true"><use href="#op-compass"/></svg> Chart a link
+                </button>
+                <div class="logbook-hero-deco" aria-hidden="true">
+                  <svg class="op-ico"><use href="#op-map"/></svg>
+                  <svg class="op-ico"><use href="#op-compass"/></svg>
+                  <svg class="op-ico"><use href="#op-anchor"/></svg>
+                </div>
+                <div class="logbook-hero-stamp" aria-hidden="true">ROUTE</div>
+              </div>
+              <section id="charts-list" class="charts-list" aria-label="Bookmarks"></section>
+              <div id="charts-modal" class="tool-modal" hidden>
+                <div class="tool-modal-backdrop" data-close-modal="charts"></div>
+                <form id="charts-form" class="charts-form parchment-card tool-modal-panel" role="dialog" aria-modal="true" aria-label="Chart editor">
+                  <input type="hidden" id="charts-id">
+                  <header class="vault-form-head">
+                    <div class="title-with-icon">
+                      <span class="op-badge" aria-hidden="true"><svg class="op-ico op-ico-lg" aria-hidden="true"><use href="#op-map"/></svg></span>
+                      <div>
+                        <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-compass"/></svg> Sea route</p>
+                        <h3 class="vault-form-title">Chart a link</h3>
+                      </div>
+                    </div>
+                  </header>
+                  <label>Title<input id="charts-title" class="field" required maxlength="160" placeholder="Grand Line Wiki"></label>
+                  <label>URL<input id="charts-url" class="field" type="url" maxlength="800" placeholder="https://"></label>
+                  <label>Tags<input id="charts-tags" class="field" placeholder="docs, reference"></label>
+                  <label>Notes<textarea id="charts-notes" class="field" rows="3" maxlength="1000"></textarea></label>
+                  <div class="vault-form-actions">
+                    <button id="charts-delete" class="danger-text" type="button" hidden>Delete</button>
+                    <button id="charts-cancel" class="secondary-btn" type="button">Cancel</button>
+                    <button class="btn-primary rounded-xl px-5 py-2.5 font-extrabold" type="submit">Save chart</button>
+                  </div>
+                </form>
+              </div>
+              <section id="charts-empty" class="empty-state" hidden>
+                <h2 class="font-pirate text-3xl text-sea-900">No charts yet</h2>
+                <p>Plot your first bookmark on the map.</p>
+              </section>
+            </div>
+          </section>
+
+          <!-- SNIPPETS -->
+          <section id="view-snippets" class="tool-view" data-panel hidden>
+            <div class="view-pad">
+              <div class="panel-sky" aria-hidden="true">
+                <svg class="notes-sky-hat" focusable="false"><use href="#op-hat"/></svg>
+                <svg class="notes-sky-anchor" focusable="false"><use href="#op-anchor"/></svg>
+              </div>
+              <div class="logbook-hero" data-banner="WANTED · BLUEPRINTS">
+                <div class="logbook-hero-seal" aria-hidden="true">
+                  <svg class="op-ico op-ico-lg" focusable="false"><use href="#op-hammer"/></svg>
+                </div>
+                <div class="logbook-hero-copy">
+                  <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-hammer"/></svg> Shipwright stash</p>
+                  <h2 class="font-pirate text-3xl text-sea-900">Snippets</h2>
+                  <p class="view-lede logbook-lede">Reusable code blocks and commands — copy in one tap.</p>
+                </div>
+                <button id="snippets-new" class="btn-primary add-note-btn toolbar-cta logbook-new-btn" type="button">
+                  <svg class="op-ico" aria-hidden="true"><use href="#op-fruit"/></svg> New snippet
+                </button>
+                <div class="logbook-hero-deco" aria-hidden="true">
+                  <svg class="op-ico"><use href="#op-hammer"/></svg>
+                  <svg class="op-ico"><use href="#op-fruit"/></svg>
+                  <svg class="op-ico"><use href="#op-bolt"/></svg>
+                </div>
+                <div class="logbook-hero-stamp" aria-hidden="true">CODE</div>
+              </div>
+              <section id="snippets-list" class="snippets-grid" aria-label="Snippets"></section>
+              <div id="snippet-modal" class="tool-modal" hidden>
+                <div class="tool-modal-backdrop" data-close-modal="snippet"></div>
+                <form id="snippet-form" class="snippet-form parchment-card tool-modal-panel" role="dialog" aria-modal="true" aria-label="Snippet editor">
+                  <input type="hidden" id="snippet-id">
+                  <header class="vault-form-head">
+                    <div class="title-with-icon">
+                      <span class="op-badge" aria-hidden="true"><svg class="op-ico op-ico-lg" aria-hidden="true"><use href="#op-hammer"/></svg></span>
+                      <div>
+                        <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-fruit"/></svg> Blueprint stash</p>
+                        <h3 class="vault-form-title">Stash a snippet</h3>
+                      </div>
+                    </div>
+                  </header>
+                  <label>Title<input id="snippet-title" class="field" required maxlength="160"></label>
+                  <label>Language<input id="snippet-language" class="field" maxlength="40" placeholder="javascript, bash, text"></label>
+                  <label>Tags<input id="snippet-tags" class="field" placeholder="api, deploy"></label>
+                  <label>Code<textarea id="snippet-code" class="field snippet-code-input" rows="10" maxlength="100000"></textarea></label>
+                  <div class="vault-form-actions">
+                    <button id="snippet-delete" class="danger-text" type="button" hidden>Delete</button>
+                    <button id="snippet-cancel" class="secondary-btn" type="button">Cancel</button>
+                    <button class="btn-primary rounded-xl px-5 py-2.5 font-extrabold" type="submit">Save snippet</button>
+                  </div>
+                </form>
+              </div>
+              <section id="snippets-empty" class="empty-state" hidden>
+                <h2 class="font-pirate text-3xl text-sea-900">No snippets stashed</h2>
+                <p>Save a code block for quick copy aboard.</p>
+              </section>
+            </div>
+          </section>
+
+          <!-- BERRY POUCH -->
+          <section id="view-berries" class="tool-view" data-panel hidden>
+            <div class="view-pad">
+              <div class="panel-sky" aria-hidden="true">
+                <svg class="notes-sky-sun" focusable="false"><use href="#op-sun"/></svg>
+                <svg class="notes-sky-wave notes-sky-wave-b" focusable="false"><use href="#op-wave"/></svg>
+                <svg class="notes-sky-hat" focusable="false"><use href="#op-hat"/></svg>
+              </div>
+              <div class="logbook-hero" data-banner="WANTED · BERRIES">
+                <div class="logbook-hero-seal" aria-hidden="true">
+                  <svg class="op-ico op-ico-lg" focusable="false"><use href="#op-berry"/></svg>
+                </div>
+                <div class="logbook-hero-copy">
+                  <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-meat"/></svg> Sanji's kitchen ledger</p>
+                  <h2 class="font-pirate text-3xl text-sea-900">Berry pouch</h2>
+                  <p class="view-lede logbook-lede">Income and expenses in one cook's book — bounty in, rations out, balance on the stamp.</p>
+                </div>
+                <button id="berry-new" class="btn-primary add-note-btn toolbar-cta logbook-new-btn" type="button">
+                  <svg class="op-ico" aria-hidden="true"><use href="#op-berry"/></svg> Log entry
+                </button>
+                <div class="logbook-hero-deco" aria-hidden="true">
+                  <svg class="op-ico"><use href="#op-meat"/></svg>
+                  <svg class="op-ico"><use href="#op-berry"/></svg>
+                  <svg class="op-ico"><use href="#op-chest"/></svg>
+                </div>
+                <div class="logbook-hero-stamp">BALANCE · <span id="berry-month-balance">0 ₿</span></div>
+              </div>
+
+              <div class="berry-stats">
+                <article class="berry-stat-card parchment-card berry-stat-income">
+                  <p class="berry-stat-label">Month income</p>
+                  <p id="berry-month-income" class="berry-stat-value">0 ₿</p>
+                </article>
+                <article class="berry-stat-card parchment-card berry-stat-expense">
+                  <p class="berry-stat-label">Month spend</p>
+                  <p id="berry-month-spend" class="berry-stat-value">0 ₿</p>
+                </article>
+                <article class="berry-stat-card parchment-card">
+                  <p class="berry-stat-label">Entries</p>
+                  <p id="berry-count" class="berry-stat-value">0</p>
+                </article>
+                <article class="berry-stat-card parchment-card">
+                  <p class="berry-stat-label">Top spend</p>
+                  <p id="berry-top-category" class="berry-stat-value berry-stat-value-sm">—</p>
+                </article>
+              </div>
+
+              <div class="berry-charts">
+                <article class="berry-chart-card parchment-card">
+                  <header class="berry-chart-head">
+                    <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-flag"/></svg> Voyage trend</p>
+                    <h3 class="berry-chart-title">Last 7 days</h3>
+                    <p class="berry-chart-lede">Gold bars fill the pouch · crimson empties it</p>
+                  </header>
+                  <div id="berry-chart-trend" class="berry-chart-stage" role="img" aria-label="Income versus expense over the last seven days"></div>
+                  <div class="berry-chart-legend" aria-hidden="true">
+                    <span class="berry-legend-item berry-legend-income">Income</span>
+                    <span class="berry-legend-item berry-legend-expense">Expense</span>
+                  </div>
+                </article>
+                <article class="berry-chart-card parchment-card">
+                  <header class="berry-chart-head">
+                    <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-compass"/></svg> Spend compass</p>
+                    <h3 class="berry-chart-title">This month's outflows</h3>
+                    <p class="berry-chart-lede">Where the berries sailed this month</p>
+                  </header>
+                  <div id="berry-chart-cats" class="berry-chart-stage berry-chart-stage-donut" role="img" aria-label="Expense categories this month"></div>
+                </article>
+              </div>
+
+              <div class="logbook-rail">
+                <p class="logbook-rail-label"><svg class="op-ico" aria-hidden="true"><use href="#op-compass"/></svg> Ledger filters</p>
+                <div id="berry-flow-filters" class="berry-flow-filters tag-filters" aria-label="Filter by income or expense"></div>
+                <div id="berry-category-filters" class="berry-category-filters tag-filters" aria-label="Filter by category"></div>
+              </div>
+              <section id="berries-list" class="berries-list" aria-label="Ledger entries"></section>
+              <section id="berries-empty" class="empty-state" hidden>
+                <h2 class="font-pirate text-3xl text-sea-900">Pouch is empty</h2>
+                <p>Log income or an expense — the cook will stamp the receipt.</p>
+              </section>
+
+              <div id="berry-modal" class="tool-modal" hidden>
+                <div class="tool-modal-backdrop" data-close-modal="berry"></div>
+                <form id="berry-form" class="berry-form parchment-card tool-modal-panel" role="dialog" aria-modal="true" aria-label="Log ledger entry">
+                  <input type="hidden" id="berry-id">
+                  <header class="vault-form-head">
+                    <div class="title-with-icon">
+                      <span class="op-badge" aria-hidden="true"><svg class="op-ico op-ico-lg" aria-hidden="true"><use href="#op-berry"/></svg></span>
+                      <div>
+                        <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-meat"/></svg> Kitchen ledger</p>
+                        <h3 id="berry-form-heading" class="vault-form-title">Log entry</h3>
+                      </div>
+                    </div>
+                  </header>
+                  <div class="berry-form-grid">
+                    <label>Type
+                      <select id="berry-flow" class="field">
+                        <option value="expense">Expense — berries out</option>
+                        <option value="income">Income — berries in</option>
+                      </select>
+                    </label>
+                    <label>Amount<input id="berry-amount" class="field" type="number" step="0.01" min="0" required placeholder="12.50"></label>
+                    <label>Title<input id="berry-title" class="field" required maxlength="160" placeholder="Rations / bounty share"></label>
+                    <label>Category
+                      <select id="berry-category" class="field"></select>
+                    </label>
+                    <label>Date<input id="berry-date" class="field" type="date"></label>
+                    <label>Repeats
+                      <select id="berry-repeat" class="field">
+                        <option value="none">Never — one-shot</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                      </select>
+                    </label>
+                  </div>
+                  <p id="berry-repeat-hint" class="profile-field-hint" hidden>Next auto entry will seal on the schedule after this date.</p>
+                  <label>Note<textarea id="berry-note" class="field" rows="2" maxlength="500" placeholder="Cook's note…"></textarea></label>
+                  <div class="vault-form-actions">
+                    <button id="berry-delete" class="danger-text" type="button" hidden>Delete</button>
+                    <button id="berry-cancel" class="secondary-btn" type="button">Cancel</button>
+                    <button id="berry-submit" class="btn-primary rounded-xl px-5 py-2.5 font-extrabold" type="submit">Seal entry</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          <!-- WATCHTOWER -->
+          <section id="view-watchtower" class="tool-view" data-panel hidden>
+            <div class="view-pad">
+              <div class="panel-sky" aria-hidden="true">
+                <svg class="notes-sky-sun" focusable="false"><use href="#op-sun"/></svg>
+                <svg class="notes-sky-wave notes-sky-wave-a" focusable="false"><use href="#op-wave"/></svg>
+              </div>
+              <div class="logbook-hero" data-banner="WANTED · BELL">
+                <div class="logbook-hero-seal" aria-hidden="true">
+                  <svg class="op-ico op-ico-lg" focusable="false"><use href="#op-compass"/></svg>
+                </div>
+                <div class="logbook-hero-copy">
+                  <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-compass"/></svg> Crow's nest</p>
+                  <h2 class="font-pirate text-3xl text-sea-900">Watchtower</h2>
+                  <p class="view-lede logbook-lede">Reminders for soft nudges — alarms ring the ship's bell until you answer.</p>
+                </div>
+                <button id="signal-new" class="btn-primary add-note-btn toolbar-cta logbook-new-btn" type="button">
+                  <svg class="op-ico" aria-hidden="true"><use href="#op-flag"/></svg> Set signal
+                </button>
+                <div class="logbook-hero-deco" aria-hidden="true">
+                  <svg class="op-ico"><use href="#op-compass"/></svg>
+                  <svg class="op-ico"><use href="#op-bolt"/></svg>
+                  <svg class="op-ico"><use href="#op-sun"/></svg>
+                </div>
+                <div class="logbook-hero-stamp" aria-hidden="true">BELL</div>
+              </div>
+
+              <div class="signal-toolbar">
+                <div class="signal-kind-filters" role="group" aria-label="Filter signals">
+                  <button class="tag-filter signal-filter active" type="button" data-signal-filter="all">All</button>
+                  <button class="tag-filter signal-filter" type="button" data-signal-filter="reminder">Reminders</button>
+                  <button class="tag-filter signal-filter" type="button" data-signal-filter="alarm">Alarms</button>
+                  <button class="tag-filter signal-filter" type="button" data-signal-filter="upcoming">Upcoming</button>
+                </div>
+                <button id="signal-notify-btn" class="secondary-btn" type="button">Enable browser alerts</button>
+              </div>
+
+              <section id="signals-list" class="signals-grid" aria-label="Reminders and alarms"></section>
+              <section id="signals-empty" class="empty-state" hidden>
+                <p>No signals yet — set a reminder or ring the ship's alarm.</p>
+              </section>
+
+              <div id="signal-modal" class="tool-modal" hidden>
+                <div class="tool-modal-backdrop" data-close-modal="signal"></div>
+                <form id="signal-form" class="signal-form parchment-card tool-modal-panel" role="dialog" aria-modal="true" aria-label="Signal editor">
+                  <input type="hidden" id="signal-id">
+                  <p class="tool-modal-banner" aria-hidden="true">WANTED · SIGNAL</p>
+                  <h3 class="font-pirate text-2xl text-sea-900">Set the bell</h3>
+                  <label>Title<input id="signal-title" class="field" required maxlength="160" placeholder="What should the nest shout?"></label>
+                  <label>Type
+                    <select id="signal-kind" class="field">
+                      <option value="reminder">Reminder — soft notice</option>
+                      <option value="alarm">Alarm — ship's bell</option>
+                    </select>
+                  </label>
+                  <label class="voyage-clock-label">When
+                    <input id="signal-due" type="hidden">
+                    <div id="voyage-clock" class="voyage-clock" aria-label="Pick date and time">
+                      <p class="voyage-clock-readout" id="voyage-clock-readout">—</p>
+                      <div class="voyage-clock-days" id="voyage-clock-days" role="listbox" aria-label="Day"></div>
+                      <div class="voyage-clock-modes">
+                        <button type="button" class="voyage-clock-mode active" data-mode="hour">Hour</button>
+                        <button type="button" class="voyage-clock-mode" data-mode="minute">Minute</button>
+                      </div>
+                      <div class="voyage-clock-face" id="voyage-clock-face">
+                        <span class="voyage-clock-sun" aria-hidden="true"></span>
+                        <div class="voyage-clock-hand" id="voyage-clock-hand"><span></span></div>
+                        <span class="voyage-clock-hub" aria-hidden="true"></span>
+                        <span class="voyage-clock-brand" id="voyage-clock-brand">HOUR</span>
+                      </div>
+                      <div class="voyage-clock-ampm">
+                        <button type="button" class="voyage-clock-ampm-btn" data-ampm="am">AM</button>
+                        <button type="button" class="voyage-clock-ampm-btn" data-ampm="pm">PM</button>
+                      </div>
+                    </div>
+                  </label>
+                  <label>Repeat
+                    <select id="signal-repeat" class="field">
+                      <option value="none">Once</option>
+                      <option value="daily">Daily</option>
+                      <option value="weekly">Weekly</option>
+                    </select>
+                  </label>
+                  <label>Note<textarea id="signal-note" class="field" rows="3" maxlength="500" placeholder="Optional details…"></textarea></label>
+                  <label class="signal-check"><input id="signal-sound" type="checkbox"> Ring sound when it fires</label>
+                  <label class="signal-check"><input id="signal-enabled" type="checkbox" checked> Armed &amp; watching</label>
+                  <label>Snooze minutes<input id="signal-snooze" class="field" type="number" min="1" max="60" value="5"></label>
+                  <div class="tool-modal-actions">
+                    <button id="signal-delete" class="danger-text" type="button" hidden>Delete</button>
+                    <button id="signal-cancel" class="secondary-btn" type="button">Cancel</button>
+                    <button class="btn-primary" type="submit">Seal signal</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          <!-- FOCUS -->
+          <section id="view-focus" class="tool-view" data-panel hidden>
+            <div class="view-pad">
+              <div class="panel-sky" aria-hidden="true">
+                <svg class="notes-sky-sun" focusable="false"><use href="#op-sun"/></svg>
+                <svg class="notes-sky-hat" focusable="false"><use href="#op-hat"/></svg>
+                <svg class="notes-sky-wave notes-sky-wave-a" focusable="false"><use href="#op-wave"/></svg>
+              </div>
+              <div class="logbook-hero" data-banner="WANTED · FOCUS">
+                <div class="logbook-hero-seal" aria-hidden="true">
+                  <svg class="op-ico op-ico-lg" focusable="false"><use href="#op-bolt"/></svg>
+                </div>
+                <div class="logbook-hero-copy">
+                  <p class="eyebrow"><svg class="op-ico" aria-hidden="true"><use href="#op-bolt"/></svg> Gear Second</p>
+                  <h2 class="font-pirate text-3xl text-sea-900">Focus timer</h2>
+                  <p class="view-lede logbook-lede">Sprint through work voyages — log completed sessions to your captain's log.</p>
+                </div>
+                <button id="focus-hero-start" class="btn-primary add-note-btn toolbar-cta logbook-new-btn" type="button">
+                  <svg class="op-ico" aria-hidden="true"><use href="#op-bolt"/></svg> Start
+                </button>
+                <div class="logbook-hero-deco" aria-hidden="true">
+                  <svg class="op-ico"><use href="#op-bolt"/></svg>
+                  <svg class="op-ico"><use href="#op-meat"/></svg>
+                  <svg class="op-ico"><use href="#op-flag"/></svg>
+                </div>
+                <div class="logbook-hero-stamp" aria-hidden="true">GEAR 2</div>
+              </div>
+              <div class="focus-panel parchment-card">
+                <div class="focus-presets" role="group" aria-label="Timer presets">
+                  <button class="focus-preset active tag-filter" type="button" data-minutes="25" data-kind="focus">25 min focus</button>
+                  <button class="focus-preset tag-filter" type="button" data-minutes="5" data-kind="break">5 min break</button>
+                  <button class="focus-preset tag-filter" type="button" data-minutes="15" data-kind="long">15 min voyage</button>
+                </div>
+                <p id="focus-display" class="focus-display" aria-live="polite">25:00</p>
+                <p id="focus-label" class="focus-label">Focus voyage</p>
+                <div class="focus-controls">
+                  <button id="focus-start" class="btn-primary rounded-xl px-6 py-2.5 font-extrabold" type="button">Start</button>
+                  <button id="focus-pause" class="secondary-btn" type="button" hidden>Pause</button>
+                  <button id="focus-reset" class="secondary-btn" type="button">Reset</button>
+                </div>
+              </div>
+              <h3 class="font-pirate mt-6 text-2xl text-sea-900"><svg class="op-ico" aria-hidden="true"><use href="#op-scroll"/></svg> Session log</h3>
+              <section id="focus-history" class="focus-history" aria-label="Focus history"></section>
+              <section id="focus-empty" class="empty-state" hidden>
+                <p>No completed focus voyages yet — start the timer above.</p>
+              </section>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <aside id="focus-widget" class="focus-widget" hidden aria-label="Focus timer widget">
+      <button id="focus-widget-toggle" class="focus-widget-pill" type="button">
+        <span class="focus-widget-seal" aria-hidden="true">
+          <svg class="op-ico" focusable="false"><use href="#op-bolt"/></svg>
+        </span>
+        <span class="focus-widget-copy">
+          <span class="focus-widget-kicker">Gear Second</span>
+          <span id="focus-widget-time" class="focus-widget-time">25:00</span>
+        </span>
+        <span id="focus-widget-state" class="focus-widget-state">Idle</span>
+      </button>
+      <div id="focus-widget-panel" class="focus-widget-panel" hidden>
+        <p class="focus-widget-banner" aria-hidden="true">WANTED · FOCUS</p>
+        <p id="focus-widget-display" class="focus-widget-display">25:00</p>
+        <div class="focus-widget-controls">
+          <button id="focus-widget-start" class="btn-primary" type="button">Start</button>
+          <button id="focus-widget-pause" class="secondary-btn" type="button" hidden>Pause</button>
+          <button id="focus-widget-reset" class="secondary-btn" type="button">Reset</button>
+        </div>
+        <button id="focus-widget-open" class="focus-widget-open" type="button">
+          <svg class="op-ico" aria-hidden="true"><use href="#op-bolt"/></svg> Open Gear Second
+        </button>
+      </div>
+    </aside>
+
+    <div id="command-palette" class="command-palette" hidden role="dialog" aria-modal="true" aria-label="Command palette">
+      <div id="command-palette-backdrop" class="command-palette-backdrop"></div>
+      <div class="command-palette-dialog">
+        <input id="command-palette-input" class="command-palette-input field" type="search" placeholder="Search notes, vault, charts..." autocomplete="off">
+        <ul id="command-palette-results" class="command-palette-results" role="listbox"></ul>
+        <p class="command-palette-hint">↑↓ navigate · Enter open · Esc close</p>
+      </div>
+    </div>
+
+    <div id="toast" class="voyage-toast" role="status" aria-live="polite" hidden>
+      <span class="voyage-toast-seal" aria-hidden="true">
+        <svg class="op-ico"><use href="#op-flag"/></svg>
+      </span>
+      <p id="toast-message" class="voyage-toast-message"></p>
+    </div>
+
+    <div id="voyage-alert" class="voyage-alert" hidden>
+      <div class="voyage-alert-backdrop" data-voyage-alert-dismiss></div>
+      <div class="voyage-alert-panel" role="alertdialog" aria-modal="true" aria-labelledby="voyage-alert-title" aria-describedby="voyage-alert-message">
+        <p class="voyage-alert-banner" id="voyage-alert-banner" aria-hidden="true">WANTED · NOTICE</p>
+        <div class="voyage-alert-seal" aria-hidden="true">
+          <svg class="op-ico op-ico-lg"><use id="voyage-alert-icon-use" href="#op-skull"></use></svg>
+        </div>
+        <h2 id="voyage-alert-title" class="voyage-alert-title font-pirate">Ahoy</h2>
+        <p id="voyage-alert-message" class="voyage-alert-message"></p>
+        <div class="voyage-alert-actions">
+          <button id="voyage-alert-cancel" class="secondary-btn" type="button">Nay</button>
+          <button id="voyage-alert-confirm" class="btn-primary" type="button">Aye</button>
+        </div>
+      </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.8.1/github-markdown-light.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/styles/github.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

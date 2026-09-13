@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "Grand Line Tools",
+    "slug": "grand-line-tools",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "grandlinetools",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.grandline.tools"
+    },
+    "android": {
+      "package": "com.grandline.tools",
+      "adaptiveIcon": {
+        "backgroundColor": "#0a2342",
+        "foregroundImage": "./assets/images/android-icon-foreground.png"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#0a2342"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#c41e3a",
+          "sounds": [],
+          "defaultChannel": "watchtower"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "apiUrl": "https://onepiece.prayushadhikari.com.np",
+      "eas": {
+        "projectId": "3c1b45fa-d2e9-49f7-b914-00d7dd47333f"
+      },
+      "router": {}
+    },
+    "owner": "adhikareeprayush"
+  }
+}

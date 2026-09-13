@@ -1,0 +1,52 @@
+# Production stack for https://onepiece.prayushadhikari.com.np
+# Usage:
+#   1. cp .env.production.example .env.production  # then edit secrets
+#   2. Point DNS A/AAAA for onepiece.prayushadhikari.com.np at this host
+#   3. docker compose up -d --build
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: glt-app
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      PORT: "4173"
+      APP_PUBLIC_URL: https://onepiece.prayushadhikari.com.np
+    volumes:
+      - glt-data:/app/data
+      - glt-notes:/app/notes
+    expose:
+      - "4173"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:4173/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 25s
+
+  caddy:
+    image: caddy:2.8-alpine
+    container_name: glt-caddy
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  glt-data:
+  glt-notes:
+  caddy-data:
+  caddy-config:

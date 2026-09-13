@@ -1,0 +1,9 @@
+node_modules/
+.venv-rembg/
+.env
+.env.production
+data/
+dist/
+mobile/.env
+mobile/.env.production.local
+

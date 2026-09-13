@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "Grand Line Tools",
+  "version": "1.2.0",
+  "description": "Companion for charts, berries, logbook, and watchtower — requires your ship account.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "grand-line-tools@localhost",
+      "strict_min_version": "115.0"
+    }
+  },
+  "browser_action": {
+    "default_title": "Grand Line Tools",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "https://onepiece.prayushadhikari.com.np/*"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  }
+}
